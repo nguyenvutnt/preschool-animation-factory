@@ -1,0 +1,22 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Temporary work directories
+_work/
+*.tmp
+temp_*
+logs/*.log
+
+# Media render outputs (keep repo light)
+out/
+*.mp4
+*.mkv
+*.avi
+
+# OS / Editor artifacts
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

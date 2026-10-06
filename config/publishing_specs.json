@@ -1,0 +1,51 @@
+{
+  "project_name": "Preschool ESL Animation Factory",
+  "daily_target_capacity": 1000,
+  "standards": {
+    "pedagogy": {
+      "framework": "Cambridge English: Young Learners (Pre-A1 Starters)",
+      "phonics_curriculum": "Oxford Phonics World",
+      "speech_rate_wpm": {
+        "toddler_1_3": "85-100",
+        "preschool_3_5": "100-115"
+      },
+      "interactive_pause_seconds": 3.0
+    },
+    "visual_ergonomics": {
+      "philosophy": "Low-Stimulation / Gentle Edutainment (CBeebies Standard)",
+      "min_shot_duration_seconds": 3.5,
+      "strobe_flash_prevention": "ITU-R BT.1702",
+      "palette": "Warm Pastel / Earth Tones",
+      "layout_zones": {
+        "top_visual_stage": "Y: 70px - 750px (Max 1600x680)",
+        "safe_buffer": ">= 140px",
+        "bottom_flashcard_bar": "Y: 820px - 1080px (Glenn Doman Red)"
+      }
+    },
+    "audio_broadcast": {
+      "standard": "EBU R128 / ITU-R BS.1770-4",
+      "integrated_lufs": -14.0,
+      "integrated_lufs_tolerance": 0.5,
+      "max_true_peak_dbtp": -1.0,
+      "max_lra_lu": 7.0,
+      "bgm_sidechain_ducking_db": -14.0
+    },
+    "video_encoding": {
+      "resolution": "1920x1080",
+      "aspect_ratio": "16:9",
+      "frame_rate_mode": "CFR",
+      "frame_rate": 25.0,
+      "codec": "libx264",
+      "pixel_format": "yuv420p",
+      "color_primaries": "bt709",
+      "color_transfer": "bt709",
+      "color_matrix": "bt709",
+      "gop_seconds": 2.0
+    },
+    "compliance": {
+      "coppa_rule": "16 CFR Part 312 (Made for Kids)",
+      "gdpr_k": "Zero telemetry / Zero PII",
+      "vietnam_ordinance": "Decree 360/2026/ND-CP"
+    }
+  }
+}
