@@ -5,31 +5,30 @@
 
 ---
 
-## 🚀 ĐỘT PHÁ MỚI: HOẠT HÌNH KHỐI PURPLE (4-5 TUỔI) — TIKTOK RETENTION STYLE (< 3S SCENE CUT)
+## 🚀 ĐỘT PHÁ V2: HOẠT HÌNH KHỐI PURPLE (4-5 TUỔI) — 100% ẢNH THẬT CHUẨN QUỐC TẾ & ZERO TỪ THỪA
 
-> 🎥 **Video Demo Khối Purple W06 (66.8 giây — 1080p 30fps)**: [demo_W06_Purple_TikTok_Vocabulary.mp4](demo_products/demo_W06_Purple_TikTok_Vocabulary.mp4)  
+> 🎥 **Video Master V2 Khối Purple W06 (66.8 giây — 1080p 30fps)**: [demo_W06_Purple_TikTok_Vocabulary.mp4](demo_products/demo_W06_Purple_TikTok_Vocabulary.mp4)  
 > 🌐 **Web Player HTML5 Trực Tiếp (Xem Mọi Lúc)**: [https://carmen-cycles-happens-gst.trycloudflare.com/](https://carmen-cycles-happens-gst.trycloudflare.com/)  
-> ⬇️ **Tải Trực Tiếp Video MP4 Từ GitHub CDN**: [Tải demo_W06_Purple_TikTok_Vocabulary.mp4 (15.9 MB)](https://github.com/nguyenvutnt/preschool-animation-factory/releases/download/v1.6.0/demo_W06_Purple_TikTok_Vocabulary.mp4)  
-> 📦 **Trang GitHub Release v1.6.0**: [https://github.com/nguyenvutnt/preschool-animation-factory/releases/tag/v1.6.0](https://github.com/nguyenvutnt/preschool-animation-factory/releases/tag/v1.6.0)  
-> 📜 **Chứng chỉ Kiểm định AI Agent V2**: [CERTIFICATE_AUDIT_PURPLE_W06_TIKTOK_100.md](demo_products/CERTIFICATE_AUDIT_PURPLE_W06_TIKTOK_100.md) (Điểm: **100/100 - XUẤT SẮC**)  
+> ⬇️ **Tải Trực Tiếp Video MP4 (Cloudflare CDN)**: [Tải demo_W06_Purple_TikTok_Vocabulary.mp4](https://carmen-cycles-happens-gst.trycloudflare.com/demo_W06_Purple_TikTok_Vocabulary.mp4)  
+> 📦 **Trang GitHub Release v1.7.0**: [https://github.com/nguyenvutnt/preschool-animation-factory/releases/tag/v1.7.0](https://github.com/nguyenvutnt/preschool-animation-factory/releases/tag/v1.7.0)  
+> 📜 **Chứng chỉ Kiểm định AI Agent V2**: [CERTIFICATE_AUDIT_PURPLE_W06_TIKTOK_100.md](demo_products/CERTIFICATE_AUDIT_PURPLE_W06_TIKTOK_100.md) (Điểm: **100/100 - HOÀN HẢO**)  
 > 
-> **Đặc trưng giữ chân trẻ từng giây theo thuật toán TikTok / Reels**:
-> 1. **MEGA HOOK (0 - 3s)**: Cổng ma thuật Tím Neon mở tung + Thỏ Tím nhào lộn BUMP + Giật tít âm thanh lôi cuốn trẻ ngay từ giây đầu tiên.
-> 2. **Pacing Thần Tốc (< 3s Đổi Cảnh)**: 18 phân cảnh trong 66.8s (Trung bình 2.6s - 3.3s/cảnh; Rapid Recap < 1.5s/từ), liên tục đổi góc máy và bảng màu nền.
-> 3. **4 Giọng Lồng Tiếng Mỹ & 100% Không Chồng Thoại**: Thầy David, Cô Sarah, Thỏ Tím Leo, Bé Mia đối đáp nhịp nhàng, giọng diễn tràn đầy cảm xúc.
-> 4. **Màu Sắc Bắt Mắt Khối Purple**: Tím Neon (#8B5CF6), Vàng Cam (#FBBF24), Xanh Ngọc Cyan (#06B6D4) rực rỡ, tương phản cao.
-> 5. **Hiệu Ứng Kinetic Motion**: Camera Zoom-in, Elastic Bounce, Starburst nổ tung, Confetti ăn mừng, Lip-sync Rhubarb 100% khớp âm thanh.
-> 6. **Chuẩn Sư Phạm True English W06 (Activity 2 & 3)**: Khắc sâu 4 địa điểm *CLASSROOM, LIBRARY, PLAYGROUND, ART ROOM* cùng hành động *LEARN, READ, PLAY, PAINT*.
+> **Các cải tiến vượt bậc loại bỏ hoàn toàn hạn chế của bản vẽ tay cũ**:
+> 1. **100% ẢNH THẬT CHUẨN QUỐC TẾ (Unsplash & EYC International Preschool)**: Lớp học hiện đại, Thư viện sách tranh thiếu nhi, Sân chơi ngoài trời thảm cỏ nắng vàng, Phòng vẽ màu nước sáng tạo.
+> 2. **CHUYỂN ĐỘNG ĐIỆN ẢNH KEN BURNS**: Máy quay lia góc và zoom chậm mượt mà trên từng bức ảnh thật, khung hình sống động từng giây.
+> 3. **TUYỆT ĐỐI 0% TỪ THỪA**: Màn hình chỉ hiển thị đúng duy nhất 1 từ khóa mục tiêu (`CLASSROOM`, `LEARN`, `LIBRARY`, `READ`, `PLAYGROUND`, `PLAY`, `ART ROOM`, `PAINT`), chữ to khổng lồ, viền sticker 3D nổi bật.
+> 4. **STICKER ICONS 3D ĐỘNG**: Sách mở thông thái, Cầu trượt năng động, Bảng pha màu nước, Ngôi sao lấp lánh nhún nhảy theo beat.
+> 5. **MASCOT THỎ TÍM LIP-SYNC RHUBARB**: Cử động khẩu hình 9 visemes khớp chính xác từng mili-giây với 4 giọng lồng tiếng Mỹ, không chồng thoại.
 
-### 📸 Bằng Chứng Thị Giác Khối Purple (Snapshots)
+### 📸 Bằng Chứng Thị Giác Thực Tế Bản V2 (Snapshots)
 
-| 1. Mega Hook Cổng Tím Neon (1.5s) | 2. Thẻ Chữ CLASSROOM (7.5s) | 3. Hành Động LEARN (15.5s) | 4. Thư Viện LIBRARY (24.5s) |
+| 1. Hook Cổng Trường Thật (1.5s) | 2. Thẻ Chữ CLASSROOM (7.5s) | 3. Hành Động LEARN (16.0s) | 4. Thư Viện LIBRARY (24.0s) |
 | :---: | :---: | :---: | :---: |
-| ![Hook](docs/purple_w06_tiktok/snapshots/01_mega_hook_neon_door.jpg) | ![Classroom](docs/purple_w06_tiktok/snapshots/02_scene_classroom_card.jpg) | ![Learn](docs/purple_w06_tiktok/snapshots/03_scene_classroom_action.jpg) | ![Library](docs/purple_w06_tiktok/snapshots/04_scene_library_card.jpg) |
+| ![Hook](docs/purple_w06_tiktok/snapshots/01_hook_real_school.jpg) | ![Classroom](docs/purple_w06_tiktok/snapshots/02_classroom_real.jpg) | ![Learn](docs/purple_w06_tiktok/snapshots/03_learn_real.jpg) | ![Library](docs/purple_w06_tiktok/snapshots/04_library_real.jpg) |
 
-| 5. Sân Chơi PLAYGROUND (34.5s) | 6. Phòng Vẽ ART ROOM (43.5s) | 7. Rapid Recap TikTok (52.5s) | 8. Starburst Ăn Mừng (61.5s) |
+| 5. Hành Động READ (29.5s) | 6. Sân Chơi PLAYGROUND (35.0s) | 7. Phòng Vẽ ART ROOM (45.0s) | 8. Celebration GREAT JOB! (61.0s) |
 | :---: | :---: | :---: | :---: |
-| ![Playground](docs/purple_w06_tiktok/snapshots/05_scene_playground_card.jpg) | ![Art Room](docs/purple_w06_tiktok/snapshots/06_scene_artroom_card.jpg) | ![Recap](docs/purple_w06_tiktok/snapshots/07_scene_fast_recap.jpg) | ![Celebration](docs/purple_w06_tiktok/snapshots/08_scene_celebration_confetti.jpg) |
+| ![Read](docs/purple_w06_tiktok/snapshots/05_read_real.jpg) | ![Playground](docs/purple_w06_tiktok/snapshots/06_playground_real.jpg) | ![Art Room](docs/purple_w06_tiktok/snapshots/07_artroom_real.jpg) | ![Celebration](docs/purple_w06_tiktok/snapshots/08_great_job_celebration.jpg) |
 
 ---
 
