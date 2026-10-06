@@ -45,7 +45,8 @@ def render_clip_hoan_chinh(
     subject_image_path: Optional[Path] = None
 ) -> Dict[str, Any]:
     """Sản xuất 1 clip video mầm non đa thể loại đạt chuẩn xuất bản quốc tế."""
-    work_dir = out_dir / f"_work_{clip_id}"
+    out_dir = out_dir.resolve()
+    work_dir = (out_dir / f"_work_{clip_id}").resolve()
     work_dir.mkdir(parents=True, exist_ok=True)
     t_start = time.time()
     g = genre.lower().strip()
@@ -97,9 +98,9 @@ def render_clip_hoan_chinh(
     ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
 
     with open(concat_txt, "w", encoding="utf-8") as f:
-        f.write(f"file '{lead_silence}'\n")
+        f.write(f"file '{lead_silence.resolve()}'\n")
         for p in speech_parts:
-            f.write(f"file '{p}'\n")
+            f.write(f"file '{p.resolve()}'\n")
 
     full_speech = work_dir / "full_speech.mp3"
     subprocess.run([
