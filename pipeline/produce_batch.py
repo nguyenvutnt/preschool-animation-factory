@@ -109,14 +109,18 @@ def xuat_bao_cao_manifest(results: List[Dict[str, Any]], out_dir: Path) -> Path:
 
     # Ghi CSV
     if results:
-        fieldnames = ["video_file", "genre", "status", "resolution", "frame_rate", "integrated_lufs", "render_time_seconds", "bgm_used"]
+        fieldnames = [
+            "video_file", "genre", "status", "public_release", "audit_score",
+            "audit_id", "resolution", "frame_rate", "integrated_lufs",
+            "render_time_seconds", "sha256_hash", "bgm_used"
+        ]
         with open(manifest_csv, "w", newline="", encoding="utf-8") as f:
             writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
             writer.writeheader()
             for r in results:
                 writer.writerow(r)
 
-    print(f"📊 Đã xuất báo cáo xuất xưởng:")
+    print(f"📊 Đã xuất báo cáo xuất xưởng kèm Chứng chỉ Kiểm định:")
     print(f"   - JSON: {manifest_json}")
     print(f"   - CSV:  {manifest_csv}")
     return manifest_json
@@ -129,7 +133,7 @@ def chay_san_xuat_hang_loat(
     duration_factor: float = 1.0,
     out_dir: Optional[Path] = None
 ) -> List[Dict[str, Any]]:
-    """Quy trình sản xuất công nghiệp trọn gói."""
+    """Quy trình sản xuất công nghiệp trọn gói có AI Agent Audit bảo chứng."""
     if out_dir is None:
         out_dir = DIST_DIR
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -151,17 +155,39 @@ def chay_san_xuat_hang_loat(
     )
     print(f"📋 Đã chuẩn bị {len(tasks)} kịch bản đạt chuẩn CEFR Pre-A1 & Oxford Phonics.")
 
-    # Chạy sản xuất qua Worker Pool
+    # 1. Chạy sản xuất qua Worker Pool
     results = chay_worker_pool(tasks, out_dir, max_workers=workers)
 
-    # Xuất báo cáo
+    # 2. Kích hoạt Cổng Giám Định AI Agent (6-Stage Audit Gate)
+    print(f"\n🛡️ [CỔNG KIỂM ĐỊNH AI AGENT] Đang thẩm định chất lượng quốc tế cho {len(results)} clips...")
+    from core.audit_agent import GlobalPreschoolAuditAgent
+    auditor = GlobalPreschoolAuditAgent()
+    certified_count = 0
+    for r in results:
+        v_path = Path(r["video_file"])
+        if v_path.exists():
+            rep = auditor.audit_full_pipeline(
+                v_path,
+                topic=r.get("topic", v_path.stem),
+                genre=r.get("genre", "vocabulary")
+            )
+            r["audit_id"] = rep.audit_id
+            r["audit_score"] = rep.global_score
+            r["sha256_hash"] = rep.sha256_fingerprint
+            r["public_release"] = rep.overall_status
+            if rep.overall_status == "CERTIFIED_APPROVED":
+                certified_count += 1
+            else:
+                r["status"] = "REJECTED_AUDIT_FAIL"
+
+    # 3. Xuất báo cáo và chứng chỉ
     xuat_bao_cao_manifest(results, out_dir)
 
     total_time = round(time.time() - t0, 2)
-    pass_count = sum(1 for r in results if r.get("status") == "PUBLISH_APPROVED")
     print("=" * 70)
     print(f"✨ HOÀN TẤT ĐỢT SẢN XUẤT:")
-    print(f"   - Tổng clip xuất xưởng: {len(results)} clips ({pass_count}/{len(results)} ĐẠT CHUẨN XUẤT BẢN)")
+    print(f"   - Tổng clip xuất xưởng: {len(results)} clips")
+    print(f"   - Chứng nhận Xuất bản Toàn cầu (CERTIFIED_APPROVED): {certified_count}/{len(results)} clips")
     print(f"   - Tổng thời gian: {total_time} giây ({round(total_time/60, 2)} phút)")
     print(f"   - Tốc độ trung bình: {round(len(results) / (total_time/60), 1)} clip/phút (~{round((len(results)/(total_time/60))*60)} clip/giờ)")
     print("=" * 70)

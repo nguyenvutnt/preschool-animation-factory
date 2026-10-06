@@ -13,8 +13,8 @@ logs/*.log
 # Media render outputs (keep repo light)
 out/
 out_*/
-dist_publish/
 dist/
+dist_*/
 *.mp4
 *.mkv
 *.avi

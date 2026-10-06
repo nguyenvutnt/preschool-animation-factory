@@ -28,7 +28,7 @@ Dây chuyền sản xuất được thiết kế theo mô hình **Công nghiệp
 [5. Động cơ Render FFmpeg]   ──► Parallel Worker Pool (4–6 Workers), Rec.709 CFR 25fps (5.3x real-time)
                 │
                 ▼
-[6. Cổng kiểm định Auto QC] ──► Tự động thẩm định LUFS, Black frames, Resolution trước khi cấp mã PUBLISH_APPROVED
+[6. AI Agent Audit 6 Cổng] ──► Giám định toàn trình 6 Cổng (Sư phạm, Ngữ âm, Thị giác, Âm thanh, Mã hóa, Cấp chứng chỉ SHA256)
 ```
 
 ---
@@ -66,6 +66,7 @@ preschool-animation-factory/
 │   ├── subtitle_generator.py # Phụ đề ASS Glenn Doman
 │   ├── video_renderer.py     # Động cơ render FFmpeg siêu tốc
 │   ├── qc_validator.py       # Cổng kiểm định chất lượng tự động
+│   ├── audit_agent.py        # Giám định viên Trưởng AI 6 Cổng kiểm định chuẩn quốc tế
 │   └── clone_engine.py       # Reverse-engineer link YouTube/TikTok -> True English
 ├── data/                     # Ngữ liệu gốc 48 tuần True English
 │   ├── master-te.json        # Ma trận 48 tuần x 6 khối tuổi
@@ -73,7 +74,8 @@ preschool-animation-factory/
 ├── pipeline/                 # Bộ điều phối sản xuất hàng loạt
 │   ├── worker_pool.py        # Quản lý 4-8 worker render song song
 │   ├── produce_batch.py      # Điều phối sản xuất 100 - 500 clip/ngày (thời lượng 1-5 phút)
-│   └── daemon_runner.py      # Tiến trình chạy tự động 24/7
+│   ├── daemon_runner.py      # Tiến trình chạy tự động 24/7
+│   └── audit_cli.py          # CLI kiểm định chất lượng toàn trình trước khi phát hành
 ├── res/                      # Kho tài nguyên dùng chung
 │   ├── bgm/                  # 10 bản nhạc nền thiếu nhi bản quyền sạch (Incompetech CC-BY 4.0)
 │   └── sfx/                  # Hiệu ứng âm thanh mộc
@@ -113,5 +115,8 @@ python3 pipeline/produce_batch.py --count 100 --workers 6
 
 # 3. Chạy tiến trình Daemon tự động hóa 24/7 (Đạt 500 clips/ngày):
 nohup python3 pipeline/daemon_runner.py --daily-target 500 --batch-size 25 --workers 6 > /dev/null 2>&1 &
+
+# 4. KIỂM ĐỊNH AI AGENT 6 CỔNG TRƯỚC KHI XUẤT BẢN RA CÔNG CHÚNG:
+python3 pipeline/audit_cli.py --video dist_publish/clip.mp4 --topic "A Familiar Ball" --age "1-2"
 ```
 
