@@ -5,15 +5,25 @@
 
 ---
 
-## 🎬 SẢN PHẨM THỰC TẾ & LINK XEM TRỰC TIẾP (LIVE DEMO PRODUCT)
+## 🎬 SẢN PHẨM MASTER VIDEO & LINK XEM TRỰC TIẾP (LIVE MASTER ANIMATION)
 
-> 📺 **Bấm vào link bên dưới để xem trực tiếp video mẫu chuẩn phát thanh quốc tế trên GitHub**:
-> - 🎥 **Video Demo Khối Red - Tuần 6 (W06)**: [demo_W06_Red_Familiar_Ball.mp4](demo_products/demo_W06_Red_Familiar_Ball.mp4)  
->   *(Chủ đề: "A Familiar Ball in a New Place" — 1080p Full HD, CFR 25.0 fps, EBU R128 -13.9 LUFS, CBeebies Low-Stimulation)*
-> - 📜 **Chứng chỉ Kiểm định AI Agent**: [CERTIFICATE_AUDIT_1791303714_demo_W06_Red_Fam.md](demo_products/CERTIFICATE_AUDIT_1791303714_demo_W06_Red_Fam.md) (Điểm: **98.3/100 - CERTIFIED APPROVED**)
-> - 🏷️ **Phiên bản phát hành chính thức (Release v1.0.0)**: [GitHub Release v1.0.0](https://github.com/nguyenvutnt/preschool-animation-factory/releases/tag/v1.0.0)
+> 📺 **Bấm vào link bên dưới để xem trực tiếp video phim hoạt hình chuẩn phát sóng quốc tế trên GitHub**:
+> - 🎥 **Master Video Khối Red - Tuần 6 (W06)**: [demo_W06_Red_Master_Animation_5min.mp4](demo_products/demo_W06_Red_Master_Animation_5min.mp4)  
+>   *(Chủ đề: "A Familiar Ball in a New Place" — Thời lượng: **5 phút 19 giây**, 1080p Full HD 30fps, Chuẩn EBU R128 -14.0 LUFS, Chuyển động Ken Burns 3D Pixar, Lồng tiếng 5 nhân vật US Motherese)*
+> - 📜 **Chứng chỉ Giám định Toàn trình AI Agent V2**: [CERTIFICATE_AUDIT_MASTER_W06_5MIN.md](demo_products/CERTIFICATE_AUDIT_MASTER_W06_5MIN.md) (Điểm: **100.0/100 - CERTIFIED APPROVED**)
+> - 🏷️ **Phiên bản phát hành chính thức (Release v1.1.0)**: [GitHub Release v1.1.0](https://github.com/nguyenvutnt/preschool-animation-factory/releases/tag/v1.1.0)
 
-![Snapshot Preview](demo_products/snapshot_15s.jpg)
+### 📸 Hình Ảnh Tiêu Biểu Trong Phim Hoạt Hình 5 Giai Đoạn Sư Phạm (Early Years 5-Phase)
+
+| 1. Đón Trẻ Đến Trường (0:15) | 2. Dạy Luân Phiên Bóng Lăn (1:15) | 3. Xây Tháp Khối Gỗ (2:25) |
+| :---: | :---: | :---: |
+| ![Arrival](demo_products/snapshot_master_01_arrival.jpg) | ![Ball Play](demo_products/snapshot_master_03_ball_play.jpg) | ![Blocks](demo_products/snapshot_master_05_block_building.jpg) |
+| *Giai đoạn 1: Khởi động Parentese* | *Giai đoạn 2: Luyện giao tiếp chia sẻ* | *Giai đoạn 3: Vận động & Hợp tác* |
+
+| 4. Kể Chuyện Thỏ Trắng & Gấu Con (3:25) | 5. Tuyên Dương Can-Do & Ru Ngủ (4:15) |
+| :---: | :---: |
+| ![Story](demo_products/snapshot_master_07_story_bunny.jpg) | ![Friendship Tree](demo_products/snapshot_master_09_friendship_tree.jpg) |
+| *Giai đoạn 4: Storybook Read-Along tương tác* | *Giai đoạn 5: Tuyên dương Can-Do & Ru ngủ* |
 
 ---
 
