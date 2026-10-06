@@ -8,7 +8,9 @@
 ## 🚀 ĐỘT PHÁ MỚI: HOẠT HÌNH KHỐI PURPLE (4-5 TUỔI) — TIKTOK RETENTION STYLE (< 3S SCENE CUT)
 
 > 🎥 **Video Demo Khối Purple W06 (66.8 giây — 1080p 30fps)**: [demo_W06_Purple_TikTok_Vocabulary.mp4](demo_products/demo_W06_Purple_TikTok_Vocabulary.mp4)  
-> 🌐 **Web Player HTML5 Trực Quan & Tải Ngay (Caddy CDN)**: [https://bot.eyc.asia/v-c0e8efc0d44cce2e3794ff0fff190b87/purple-w06-tiktok/](https://bot.eyc.asia/v-c0e8efc0d44cce2e3794ff0fff190b87/purple-w06-tiktok/)  
+> 🌐 **Web Player HTML5 Trực Tiếp (Xem Mọi Lúc)**: [https://carmen-cycles-happens-gst.trycloudflare.com/](https://carmen-cycles-happens-gst.trycloudflare.com/)  
+> ⬇️ **Tải Trực Tiếp Video MP4 Từ GitHub CDN**: [Tải demo_W06_Purple_TikTok_Vocabulary.mp4 (15.9 MB)](https://github.com/nguyenvutnt/preschool-animation-factory/releases/download/v1.6.0/demo_W06_Purple_TikTok_Vocabulary.mp4)  
+> 📦 **Trang GitHub Release v1.6.0**: [https://github.com/nguyenvutnt/preschool-animation-factory/releases/tag/v1.6.0](https://github.com/nguyenvutnt/preschool-animation-factory/releases/tag/v1.6.0)  
 > 📜 **Chứng chỉ Kiểm định AI Agent V2**: [CERTIFICATE_AUDIT_PURPLE_W06_TIKTOK_100.md](demo_products/CERTIFICATE_AUDIT_PURPLE_W06_TIKTOK_100.md) (Điểm: **100/100 - XUẤT SẮC**)  
 > 
 > **Đặc trưng giữ chân trẻ từng giây theo thuật toán TikTok / Reels**:
