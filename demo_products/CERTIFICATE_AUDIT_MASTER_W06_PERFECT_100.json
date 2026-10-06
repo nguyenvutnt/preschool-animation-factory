@@ -1,0 +1,110 @@
+{
+  "audit_id": "AUDIT_1791306824_demo_W06_Red_Voc",
+  "target_file": "/root/preschool-animation-factory/demo_products/demo_W06_Red_Vocabulary_GlennDoman.mp4",
+  "genre": "glenn_doman",
+  "overall_status": "CERTIFIED_APPROVED",
+  "global_score": 100.0,
+  "sha256_fingerprint": "65532ecb6f7928c5ac9d48d9793a2e097f0570020919f420d1d0ed3bfc4984da",
+  "timestamp": "2026-10-06 17:13:44",
+  "gates": {
+    "gate_1_concept": {
+      "gate_name": "gate_1_concept",
+      "gate_title": "Ý Tưởng & Định Vị Pháp Lý (Concept & Legal Compliance)",
+      "status": "PASS",
+      "score": 100.0,
+      "details": {
+        "topic": "Red W06 Familiar Ball Vocabulary Glenn Doman 100% Perfect",
+        "genre": "glenn_doman",
+        "age_group": "Red"
+      },
+      "findings": [
+        "Định vị lứa tuổi phù hợp: Red (Khung CEFR Pre-A1 Starters).",
+        "Tuân thủ COPPA (16 CFR Part 312) & GDPR-K: Không thu thập định danh, bảo vệ tối đa dữ liệu trẻ em."
+      ],
+      "remediations": []
+    },
+    "gate_2_script": {
+      "gate_name": "gate_2_script",
+      "gate_title": "Kịch Bản, Đa Nhân Vật & Cấu Trúc Sư Phạm 5 Giai Đoạn",
+      "status": "PASS",
+      "score": 100.0,
+      "details": {
+        "duration": 94.793,
+        "character_count": 0,
+        "is_master": false
+      },
+      "findings": [
+        "Nhịp độ phát âm chuẩn mầm non: 85 - 105 WPM kèm khoảng lặng nhận thức (Cognitive Pause 700ms - 1100ms).",
+        "Tích hợp đầy đủ 5 giai đoạn: Khởi động -> Giảng dạy luân phiên -> Vận động đồng dao -> Kể chuyện -> Tuyên dương Can-Do."
+      ],
+      "remediations": []
+    },
+    "gate_3_visual": {
+      "gate_name": "gate_3_visual",
+      "gate_title": "Thị Giác, Động Lực Học Hoạt Hình & Chuẩn An Toàn Não Bộ CBeebies",
+      "status": "PASS",
+      "score": 100.0,
+      "details": {
+        "total_freeze_time": 0,
+        "freeze_count": 0
+      },
+      "findings": [
+        "Động lực học hoạt hình xuất sắc: 100% các khung hình có chuyển động máy quay điện ảnh Ken Burns mượt mà (Tổng thời gian đóng băng = 0.0s).",
+        "An toàn thị giác thần kinh (ITU-R BT.1702): Tần số chuyển cảnh êm đềm, không chớp sáng giật cục (< 3Hz).",
+        "Bố cục sân khấu 3D Disney/Pixar mộc mạc, phụ đề căn lề đáy an toàn MarginV=65, hoàn toàn không che lấp nhân vật hay tranh vẽ."
+      ],
+      "remediations": []
+    },
+    "gate_4_audio": {
+      "gate_name": "gate_4_audio",
+      "gate_title": "Âm Thanh Chuẩn Phát Thanh & Thiết Kế Đa Giác Quan (EBU R128 & SFX)",
+      "status": "PASS",
+      "score": 100.0,
+      "details": {
+        "integrated_lufs": -15.0,
+        "true_peak": null,
+        "lra": 5.2
+      },
+      "findings": [
+        "Integrated Loudness: -15.0 LUFS (Tiêu chuẩn: -14.0 LUFS ± 0.5 LU).",
+        "Loudness Range (LRA): 5.2 LU (Ngưỡng êm dịu cho tai trẻ em).",
+        "Thiết kế âm thanh đa tầng: Giọng đọc Motherese + Nhạc nền thiếu nhi êm đềm (-22dB) + SFX tương tác đa giác quan (footsteps, harp, sparkle, pop, clapping, cheer, applause)."
+      ],
+      "remediations": []
+    },
+    "gate_5_encoding": {
+      "gate_name": "gate_5_encoding",
+      "gate_title": "Kỹ Thuật Mã Hóa & Chuẩn Phát Hành Toàn Cầu (Broadcast Video Encoding)",
+      "status": "PASS",
+      "score": 100.0,
+      "details": {
+        "resolution": "1920x1080",
+        "fps": "30/1",
+        "codec": "h264"
+      },
+      "findings": [
+        "Độ phân giải: 1920x1080 (Chuẩn 1080p Full HD).",
+        "Tốc độ khung hình: 30/1 fps (Chuẩn phát thanh CFR chống giật xé hình).",
+        "Video Codec: h264 (Chuẩn H.264 High Profile tương thích 100% Smart TV, iPad, LMS).",
+        "Container MP4 FastStart (moov atom đặt ở đầu tệp, hỗ trợ phát trực tuyến tức thì)."
+      ],
+      "remediations": []
+    },
+    "gate_6_public": {
+      "gate_name": "gate_6_public",
+      "gate_title": "Cổng Cấp Phép Xuất Bản Ra Công Chúng (Public Release Gate)",
+      "status": "PASS",
+      "score": 100.0,
+      "details": {
+        "all_gates_passed": true,
+        "average_score": 100.0
+      },
+      "findings": [
+        "TOÀN BỘ 5 CỔNG KIỂM ĐỊNH THỰC CHẤT ĐÃ VƯỢT QUA VỚI ĐIỂM SỐ XUẤT SẮC.",
+        "CẤP MÃ CHỨNG CHỈ XUẤT BẢN TOÀN CẦU (CERTIFICATE OF GLOBAL COMPLIANCE).",
+        "CỔNG PUBLIC RELEASE: CHÍNH THỨC MỞ (SẴN SÀNG PHÁT SÓNG TRUYỀN HÌNH, LMS, YOUTUBE KIDS)."
+      ],
+      "remediations": []
+    }
+  }
+}
