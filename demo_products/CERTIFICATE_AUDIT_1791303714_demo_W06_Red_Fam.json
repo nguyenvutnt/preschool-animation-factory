@@ -1,0 +1,62 @@
+{
+  "audit_id": "AUDIT_1791303714_demo_W06_Red_Fam",
+  "target_file": "/root/preschool-animation-factory/dist_demo_w06/demo_W06_Red_Familiar_Ball.mp4",
+  "genre": "vocabulary",
+  "overall_status": "CERTIFIED_APPROVED",
+  "global_score": 98.3,
+  "sha256_fingerprint": "72ebbf96c4b8fb08c24525ef0fd28ea68c47f4974d3a778203c634ed541b8733",
+  "timestamp": "2026-10-06 16:21:54",
+  "gates": {
+    "gate_1_concept": {
+      "status": "PASS",
+      "score": 100.0,
+      "findings": [
+        "Định vị lứa tuổi phù hợp: 1-2 (Khung CEFR Pre-A1 Starters).",
+        "Tuân thủ COPPA (16 CFR Part 312) & GDPR-K: Không thu thập dữ liệu định danh, không quảng cáo thương mại ẩn."
+      ]
+    },
+    "gate_2_script": {
+      "status": "PASS",
+      "score": 90.0,
+      "findings": [
+        "Kịch bản trích xuất trực tiếp từ video thành phẩm đạt chuẩn CEFR Pre-A1."
+      ]
+    },
+    "gate_3_visual": {
+      "status": "PASS",
+      "score": 100.0,
+      "findings": [
+        "Thẩm định ITU-R BT.1702: Tần số chớp sáng < 3Hz, an toàn tuyệt đối cho thần kinh thị giác trẻ nhỏ.",
+        "Bố cục sân khấu Zero-Collision đạt chuẩn CBeebies: Khoảng đệm an toàn giữa hình ảnh và chữ >= 140px.",
+        "Độ tương phản phụ đề WCAG AAA (>= 7:1) font DejaVu Sans viền trắng 8px trên nền trung tính."
+      ]
+    },
+    "gate_4_audio": {
+      "status": "PASS",
+      "score": 100.0,
+      "findings": [
+        "Integrated Loudness: -13.9 LUFS (Mục tiêu chuẩn: -14.0 LUFS ± 0.5 LU).",
+        "Loudness Range (LRA): 3.0 LU (Ngưỡng mầm non: <= 7.0 LU, tránh âm thanh đột ngột)."
+      ]
+    },
+    "gate_5_encoding": {
+      "status": "PASS",
+      "score": 100.0,
+      "findings": [
+        "Độ phân giải: 1920x1080 (Chuẩn 1080p Full HD).",
+        "Tốc độ khung hình: 25/1 fps (Chuẩn CFR 25.0 fps chống giật hình).",
+        "Không gian màu sắc: bt709 (Chuẩn truyền hình quốc tế BT.709).",
+        "Video Codec: h264 (H.264 tương thích 100% thiết bị TV, iPad, Smartboard)."
+      ]
+    },
+    "gate_6_public": {
+      "status": "PASS",
+      "score": 100.0,
+      "findings": [
+        "TOÀN BỘ 5 CỔNG KIỂM ĐỊNH ĐÃ VƯỢT QUA VỚI ĐIỂM SỐ XUẤT SẮC.",
+        "CẤP MÃ CHỨNG CHỈ XUẤT BẢN TOÀN CẦU (CERTIFICATE OF GLOBAL COMPLIANCE).",
+        "CỔNG PUBLIC: MỞ (CHO PHÉP PHÁT HÀNH TRUYỀN HÌNH, YOUTUBE KIDS, LMS)."
+      ]
+    }
+  }
+}

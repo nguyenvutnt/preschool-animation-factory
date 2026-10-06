@@ -5,6 +5,18 @@
 
 ---
 
+## 🎬 SẢN PHẨM THỰC TẾ & LINK XEM TRỰC TIẾP (LIVE DEMO PRODUCT)
+
+> 📺 **Bấm vào link bên dưới để xem trực tiếp video mẫu chuẩn phát thanh quốc tế trên GitHub**:
+> - 🎥 **Video Demo Khối Red - Tuần 6 (W06)**: [demo_W06_Red_Familiar_Ball.mp4](demo_products/demo_W06_Red_Familiar_Ball.mp4)  
+>   *(Chủ đề: "A Familiar Ball in a New Place" — 1080p Full HD, CFR 25.0 fps, EBU R128 -13.9 LUFS, CBeebies Low-Stimulation)*
+> - 📜 **Chứng chỉ Kiểm định AI Agent**: [CERTIFICATE_AUDIT_1791303714_demo_W06_Red_Fam.md](demo_products/CERTIFICATE_AUDIT_1791303714_demo_W06_Red_Fam.md) (Điểm: **98.3/100 - CERTIFIED APPROVED**)
+> - 🏷️ **Phiên bản phát hành chính thức (Release v1.0.0)**: [GitHub Release v1.0.0](https://github.com/nguyenvutnt/preschool-animation-factory/releases/tag/v1.0.0)
+
+![Snapshot Preview](demo_products/snapshot_15s.jpg)
+
+---
+
 ## 1. TỔNG QUAN KIẾN TRÚC HỆ THỐNG
 
 Dây chuyền sản xuất được thiết kế theo mô hình **Công nghiệp Đa luồng (Multi-Worker Industrial Pipeline)**:

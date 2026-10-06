@@ -21,6 +21,10 @@ dist_*/
 *.aac
 *.wav
 
+# Whitelist official product showcases
+!demo_products/
+!demo_products/*
+
 # OS / Editor artifacts
 .DS_Store
 Thumbs.db
