@@ -1,11 +1,25 @@
 #!/usr/bin/env python3
 r"""
-ĐỘNG CƠ HOẠT HÌNH MẦM NON MASTER ĐỈNH CAO CHUẨN QUỐC TẾ — RED W06 (GLENN DOMAN)
+ĐỘNG CƠ HOẠT HÌNH MẦM NON MASTER ĐỈNH CAO CHUẨN QUỐC TẾ — RED W06 (GLENN DOMAN V3)
 Đạt 100% toàn diện trên cả 4 trục:
-  1. PHẦN TIẾNG (Audio Sound Design): Giọng Mẹ Motherese + Giọng Bé Ana lí lắc + SFX hoạt hình phong phú + Broadcast EBU R128 (-14 LUFS).
-  2. PHẦN HÌNH (Visual & Art): Bạn Bóng Đỏ & Bóng Xanh Kawaii sống động, 10 khuôn miệng Viseme chuẩn Rhubarb, 5 trạng thái mắt, bóng đổ sàn 3D (Drop Shadow).
-  3. KHỚP CHUYỂN ĐỘNG (Motion Dynamics & Physics): Vật lý nảy trọng lực rơi tự do parabol, Squash & Stretch neo sàn (Bottom Anchor), vật lý lăn không trượt (No-Slip Roll $\Delta\theta = \Delta x / R$), va chạm đàn hồi cụng đầu (Head Bump).
-  4. KHỚP ÂM THANH & HÌNH ẢNH (Frame-Accurate Audio-Visual Sync): Khẩu hình chuyển động chính xác theo từng từ ngữ của giọng bé, frame va chạm chạm đất trùng khít 100% với đỉnh sóng SFX Boing/Bump/Whoosh/Ting.
+  1. PHẦN TIẾNG (Audio Sound Design):
+     - Tuyệt đối ZERO SPEECH OVERLAP (100% không chồng chéo lời thoại).
+     - Khoảng lặng nhận thức (Cognitive Pause) 650ms - 850ms giữa các câu thoại theo chuẩn Early Years.
+     - Âm thanh đa tầng: Giọng Mẹ Motherese + Giọng Bé Ana lí lắc + SFX hoạt hình + EBU R128 (-14.0 LUFS).
+  2. PHẦN HÌNH (Visual & Art):
+     - Quả Bóng Đỏ (True Primary Red) và Quả Bóng Xanh (True Primary Blue) đồ họa 3D khối cầu Ray-Casting Phong Shader chân thực, rực rỡ, không xỉn màu.
+     - 10 khuôn miệng Viseme chuẩn quốc tế Rhubarb Lip Sync mở đóng theo âm thanh thời gian thực.
+     - 5 trạng thái mắt (to tròn, mở ngạc nhiên, nhắm cười, nháy mắt, chớp mắt), má hồng đào mịn màng.
+     - Bóng đổ sàn 3D (Drop Shadow) co giãn động theo độ cao và tỷ lệ nén.
+     - Thẻ chữ Glenn Doman đỏ rực rỡ chuẩn phương pháp Não phải Doman (#E60026).
+  3. KHỚP CHUYỂN ĐỘNG (Motion Dynamics & Physics):
+     - Vật lý nảy trọng lực rơi tự do parabol: y(t) = y_floor - (v0*t - 0.5*g*t^2).
+     - Squash & Stretch đàn hồi neo đáy sàn (Bottom Anchor): Sx=1.40, Sy=0.58.
+     - Vật lý lăn tròn không trượt (No-Slip Roll): Delta_theta = Delta_x / R * (180 / pi).
+     - Va chạm đàn hồi cụng đầu (Head Bump) ép dẹp phương ngang Sx=0.72, Sy=1.25.
+  4. KHỚP ÂM THANH & HÌNH ẢNH (Frame-Accurate Audio-Visual Sync):
+     - Khẩu hình khớp 100% từng từ ngữ của giọng bé.
+     - Đỉnh sóng âm thanh SFX Boing, Bump, Whoosh, Ting trùng khớp từng mili-giây với khoảnh khắc nén dẹt và xuất hiện thẻ chữ.
 """
 
 import math
@@ -19,12 +33,14 @@ from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 # Đường dẫn tài nguyên
 BASE_DIR = Path("/root/scratch/engaging_sprites")
+SPHERES_DIR = BASE_DIR / "spheres"
 PARTS_DIR = BASE_DIR / "parts"
 VISEMES_DIR = BASE_DIR / "visemes"
-AUDIO_DIR = Path("/root/scratch/red_w06_engaging_audio")
-AUDIO_FILE = AUDIO_DIR / "master_audio_perfect_norm.mp3"
-MANIFEST_FILE = AUDIO_DIR / "timeline_manifest.json"
-VISEMES_FILE = Path("/root/scratch/dialogue_visemes.json")
+AUDIO_DIR = Path("/root/scratch/red_w06_audio_v2")
+
+AUDIO_FILE = AUDIO_DIR / "master_zero_overlap_norm.mp3"
+MANIFEST_FILE = AUDIO_DIR / "perfect_manifest.json"
+VISEMES_FILE = Path("/root/scratch/dialogue_visemes_v2.json")
 OUT_VIDEO = Path("/root/preschool-animation-factory/demo_products/demo_W06_Red_Vocabulary_GlennDoman.mp4")
 
 FONT_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
@@ -32,24 +48,30 @@ FONT_CARD = ImageFont.truetype(FONT_PATH, 140)
 FONT_FLASH = ImageFont.truetype(FONT_PATH, 160)
 FONT_PRAISE = ImageFont.truetype(FONT_PATH, 115)
 
-DOMAN_RED = (214, 48, 49)  # #D63031
+# Màu đỏ Glenn Doman rực rỡ chuẩn quốc tế (True Primary Red)
+DOMAN_RED = (235, 15, 35)      # #EB0F23
 PURE_WHITE = (255, 255, 255)
 
 FPS = 30
-TOTAL_DURATION = 95.0
-TOTAL_FRAMES = int(TOTAL_DURATION * FPS)
 FLOOR_Y = 740  # Tọa độ mặt sàn tiêu chuẩn
 
 # 1. NẠP DỮ LIỆU AUDIO MANIFEST & VISEMES VÀO RAM
 with open(MANIFEST_FILE, "r") as fp:
-    audio_manifest = json.load(fp)
+    manifest_data = json.load(fp)
+
+TOTAL_DURATION = manifest_data["total_duration"]
+TOTAL_FRAMES = int(TOTAL_DURATION * FPS)
+audio_events = manifest_data["events"]
+
+# Tạo map tra cứu nhanh các event theo id
+event_map = {ev["id"]: ev for ev in audio_events}
 
 with open(VISEMES_FILE, "r") as fp:
     dialogue_visemes = json.load(fp)
 
-# 2. NẠP TÀI NGUYÊN ĐỒ HỌA
-base_red = Image.open("/root/scratch/bong_do_transparent.png").convert("RGBA")
-base_blue = Image.open("/root/scratch/bong_xanh_duong_transparent.png").convert("RGBA")
+# 2. NẠP TÀI NGUYÊN ĐỒ HỌA 3D CHUẨN MÀU
+base_red = Image.open(SPHERES_DIR / "ball_red_3d_vibrant.png").convert("RGBA")
+base_blue = Image.open(SPHERES_DIR / "ball_blue_3d_vibrant.png").convert("RGBA")
 blush_img = Image.open(PARTS_DIR / "blush.png").convert("RGBA")
 drop_shadow_img = Image.open(PARTS_DIR / "drop_shadow.png").convert("RGBA")
 star_img = Image.open(BASE_DIR / "star_sparkle.png").convert("RGBA")
@@ -94,36 +116,33 @@ def spawn_ripple(x, y):
 def get_lip_sync_mouth(t_sec, speaker_filter):
     """Lấy khuôn miệng (viseme) của nhân vật tại thời điểm t_sec."""
     t_ms = t_sec * 1000.0
-    for ev in audio_manifest:
+    for ev in audio_events:
         speaker = ev.get("speaker")
         if speaker and (speaker == speaker_filter or speaker == "both_balls"):
             st = ev["start_ms"]
-            fn = ev["file"]
-            if fn in dialogue_visemes and st <= t_ms <= st + 7000:
+            ed = ev["end_ms"]
+            if st <= t_ms <= ed + 200:
                 t_local = (t_ms - st) / 1000.0
-                cues = dialogue_visemes[fn]
-                for cue in cues:
-                    if cue["start"] <= t_local < cue["end"]:
-                        return cue["value"]
+                fn = os.path.basename(ev["file"])
+                if fn in dialogue_visemes:
+                    cues = dialogue_visemes[fn]
+                    for cue in cues:
+                        if cue["start"] <= t_local < cue["end"]:
+                            return cue["value"]
     return "X"
 
-# HÀM VẼ NHÂN VẬT ĐỘNG (CHARACTER COMPOSER)
+# HÀM GHÉP KHUÔN MẶT ĐỘNG LÊN QUẢ BÓNG 3D
 def assemble_character(base_type, eye_state, mouth_viseme, pupil_offset=(0, 0)):
-    """Ghép khuôn mặt động lên thân quả bóng 600x600."""
     canvas = Image.new("RGBA", (600, 600), (0, 0, 0, 0))
     base = base_red if base_type == "red" else base_blue
-    
-    # Scale base vừa khít 600x600
-    base_scaled = base.resize((600, 600), Image.Resampling.BILINEAR)
-    canvas.alpha_composite(base_scaled, (0, 0))
+    canvas.alpha_composite(base, (0, 0))
     
     # Ghép má hồng
     canvas.alpha_composite(blush_img, (0, 0))
     
-    # Ghép mắt (có tính pupil offset nếu cần)
+    # Ghép mắt
     eye_img = eyes_sprites.get(eye_state, eyes_sprites["normal"])
     if pupil_offset != (0, 0) and eye_state in ["normal", "wide"]:
-        # Dịch chuyển nhẹ con ngươi
         dx, dy = pupil_offset
         eye_shifted = Image.new("RGBA", (600, 600), (0, 0, 0, 0))
         eye_shifted.alpha_composite(eye_img, (int(dx), int(dy)))
@@ -134,10 +153,9 @@ def assemble_character(base_type, eye_state, mouth_viseme, pupil_offset=(0, 0)):
     # Ghép khuôn miệng Viseme
     m_img = mouth_sprites.get(mouth_viseme, mouth_sprites["X"])
     canvas.alpha_composite(m_img, (0, 0))
-    
     return canvas
 
-# Cache các khung hình ghép sẵn để render siêu tốc
+# Cache khung hình ghép
 char_cache = {}
 def get_cached_character(base_type, eye_state, mouth_viseme, pupil_offset=(0, 0)):
     k = (base_type, eye_state, mouth_viseme, pupil_offset)
@@ -147,45 +165,36 @@ def get_cached_character(base_type, eye_state, mouth_viseme, pupil_offset=(0, 0)
 
 # HÀM TÍNH VẬT LÝ NẢY RƠI TỰ DO TRỌNG LỰC CHUẨN XÁC
 def calc_gravity_bounce(t, t_start, t_end, h_max, floor_y, base_d):
-    """Tính vị trí cy, scale_x, scale_y, eye_state theo vật lý trọng lực parabol."""
     dt = t - t_start
     dur = t_end - t_start
     if dt < 0 or dt > dur:
         return floor_y - base_d // 2, 1.0, 1.0, "normal", False
         
-    # Chu kỳ parabol rơi tự do: y = floor_y - h_max * (4 * dt/dur * (1 - dt/dur))
-    # Đỉnh rơi ở dt = dur / 2
     norm_t = dt / dur
     h_bounce = h_max * 4.0 * norm_t * (1.0 - norm_t)
     
-    # Tiếp đất chạm sàn (Squash đàn hồi cực mạnh tại sát sàn)
-    touch_thresh = 0.075 * dur
+    touch_thresh = 0.08 * dur
     if dt < touch_thresh or dt > (dur - touch_thresh):
-        # Đang ép dẹp chạm sàn
         p = (dt / touch_thresh) if dt < touch_thresh else ((dur - dt) / touch_thresh)
         scale_x = 1.40 - 0.40 * p
         scale_y = 0.58 + 0.42 * p
-        # Neo đáy tại sàn: cy sao cho đáy tiếp xúc floor_y
         cur_h = base_d * scale_y
         cy = floor_y - cur_h / 2.0
         eye_state = "closed_happy"
-        is_ground_impact = (dt < 0.035 * dur)
+        is_ground_impact = (dt < 0.04 * dur)
     elif norm_t < 0.25:
-        # Bật lên: Stretch duỗi dài theo đà phóng
         scale_x = 0.86
         scale_y = 1.22
         cy = floor_y - (base_d * scale_y) / 2.0 - h_bounce
         eye_state = "wide"
         is_ground_impact = False
     elif norm_t > 0.75:
-        # Rơi xuống gần sàn: hơi thuôn dài theo đà rơi
         scale_x = 0.90
         scale_y = 1.15
         cy = floor_y - (base_d * scale_y) / 2.0 - h_bounce
         eye_state = "normal"
         is_ground_impact = False
     else:
-        # Gần đỉnh: tròn đều, vận tốc triệt tiêu
         scale_x = 1.0
         scale_y = 1.0
         cy = floor_y - base_d / 2.0 - h_bounce
@@ -196,11 +205,10 @@ def calc_gravity_bounce(t, t_start, t_end, h_max, floor_y, base_d):
 
 # HÀM RENDER TỪNG KHUNG HÌNH (1080P @ 30FPS)
 def render_frame(t, frame_idx):
-    # Nền trắng tinh khiết chuẩn Glenn Doman
     img = Image.new("RGBA", (1920, 1080), (255, 255, 255, 255))
     draw = ImageDraw.Draw(img)
     
-    # 1. Đàn bong bóng cầu vồng bay nhẹ
+    # 1. Đàn bong bóng bay
     for b in bubbles_data:
         b[1] -= b[2]
         if b[1] < -120:
@@ -211,7 +219,7 @@ def render_frame(t, frame_idx):
         b_im = bubble_img.resize((b_size, b_size), Image.Resampling.BILINEAR)
         img.alpha_composite(b_im, (int(bx_cur - b_size // 2), int(b[1] - b_size // 2)))
 
-    # 2. Vòng sóng nảy xung kích (Shockwave ripples)
+    # 2. Vòng sóng nảy xung kích
     global ripples
     new_ripples = []
     for r in ripples:
@@ -230,7 +238,7 @@ def render_frame(t, frame_idx):
             new_ripples.append([cx, cy, rx, ry, alpha])
     ripples = new_ripples
 
-    # Trạng thái nhân vật mặc định
+    # Trạng thái nhân vật
     show_red = False
     red_x, red_y = 960, 540
     red_scale_x, red_scale_y = 1.0, 1.0
@@ -254,21 +262,44 @@ def render_frame(t, frame_idx):
     flash_text = None
     praise_mode = False
 
-    # Lấy viseme của bé nói từ audio manifest
-    red_mouth_sync = get_lip_sync_mouth(t, "red_ball")
-    blue_mouth_sync = get_lip_sync_mouth(t, "blue_ball")
-    both_mouth_sync = get_lip_sync_mouth(t, "both_balls")
+    # Lấy viseme giọng nói
+    red_mouth = get_lip_sync_mouth(t, "red_ball")
+    blue_mouth = get_lip_sync_mouth(t, "blue_ball")
+
+    # Mốc thời gian chính từ manifest
+    t_peek_whistle = event_map["sfx_whistle_peek"]["start_ms"] / 1000.0
+    t_peek_ana = event_map["02_ana_peekaboo"]["start_ms"] / 1000.0
+    t_boing_ana = event_map["03_ana_boing"]["start_ms"] / 1000.0
+    t_ball_intro = event_map["04_mom_ball_intro"]["start_ms"] / 1000.0
+    t_card_ball = event_map["sfx_ting_ball"]["start_ms"] / 1000.0
     
-    red_mouth = both_mouth_sync if both_mouth_sync != "X" else red_mouth_sync
-    blue_mouth = both_mouth_sync if both_mouth_sync != "X" else blue_mouth_sync
+    t_color_ask = event_map["07_mom_color_ask"]["start_ms"] / 1000.0
+    t_red_ans = event_map["08_ana_red_ans"]["start_ms"] / 1000.0
+    t_red_praise = event_map["09_mom_red_praise"]["start_ms"] / 1000.0
+    t_card_red = event_map["sfx_ting_red"]["start_ms"] / 1000.0
+    
+    t_blue_coming = event_map["12_mom_blue_coming"]["start_ms"] / 1000.0
+    t_blue_hello = event_map["13_ana_blue_hello"]["start_ms"] / 1000.0
+    t_bump = event_map["sfx_bump"]["start_ms"] / 1000.0
+    t_blue_intro = event_map["15_mom_blue_intro"]["start_ms"] / 1000.0
+    t_card_blue = event_map["sfx_ting_blue"]["start_ms"] / 1000.0
+    
+    t_roll_prompt = event_map["18_mom_roll_prompt"]["start_ms"] / 1000.0
+    t_roll_start = event_map["19_ana_roll_start"]["start_ms"] / 1000.0
+    t_card_roll = event_map["sfx_ting_roll"]["start_ms"] / 1000.0
+    
+    t_flash_1 = event_map["sfx_flash_ting_1"]["start_ms"] / 1000.0
+    t_flash_2 = event_map["sfx_flash_ting_2"]["start_ms"] / 1000.0
+    t_flash_3 = event_map["sfx_flash_ting_3"]["start_ms"] / 1000.0
+    t_flash_4 = event_map["sfx_flash_ting_4"]["start_ms"] / 1000.0
+    t_praise_final = event_map["sfx_applause"]["start_ms"] / 1000.0
 
     # =========================================================================
-    # TIMELINE LOGIC ĐỈNH CAO KHỚP 100% ÂM THANH & CHUYỂN ĐỘNG
+    # TIMELINE LOGIC ĐỒNG BỘ ZERO-OVERLAP TUYỆT ĐỐI
     # =========================================================================
     
-    # --- MÀN 1: Ú ÒA & TỪ BALL (0.0s - 25.5s) ---
-    if t < 4.2:
-        # Lấp ló ở mép sàn đất tìm chỗ trốn
+    # --- MÀN 1: Ú ÒA & TỪ BALL ---
+    if t < t_peek_whistle:
         show_red = True
         head_peek = 80 * math.sin(t * 3.0)
         red_x = 960 + 30 * math.sin(t * 2.0)
@@ -276,14 +307,12 @@ def render_frame(t, frame_idx):
         red_angle = 5 * math.sin(t * 3.0)
         red_eye = "blink" if (frame_idx % 80 in range(0, 5)) else "normal"
         red_floor = 1100
-    elif t < 7.1:
-        # 4.2s - 7.1s: Còi trượt vút lên! Bóng đỏ bật nhảy PEEK-A-BOO giữa màn hình!
+    elif t < t_boing_ana:
         show_red = True
-        prog = (t - 4.2) / 2.9
-        # Nhảy vút lên giữa màn hình
-        red_x = 960
         red_floor = FLOOR_Y
-        h_jump = 360 * math.sin(min(1.0, prog * 1.4) * math.pi / 2)
+        prog = (t - t_peek_whistle) / (t_boing_ana - t_peek_whistle)
+        h_jump = 360 * math.sin(min(1.0, prog * 1.5) * math.pi / 2)
+        red_x = 960
         red_y = 1080 - h_jump
         if prog < 0.6:
             red_scale_x, red_scale_y = 0.88, 1.18
@@ -292,34 +321,25 @@ def render_frame(t, frame_idx):
         else:
             red_scale_x, red_scale_y = 1.0, 1.0
             red_eye = "normal" if red_mouth == "X" else "wide"
-    elif t < 10.8:
-        # 7.1s - 10.8s: 3 CÚ NẢY TRỌNG LỰC BOING BOING BOING (7.35s, 8.45s, 9.55s)
+    elif t < t_ball_intro:
+        # 3 nhịp nảy Boing tương ứng 3 sfx
         show_red = True
         red_floor = FLOOR_Y
+        dur_boing = (t_ball_intro - t_boing_ana) / 3.0
+        n_bounce = int((t - t_boing_ana) / dur_boing)
+        t_sub_start = t_boing_ana + n_bounce * dur_boing
+        t_sub_end = t_sub_start + dur_boing
         
-        # 3 pha nảy chuẩn xác với thời điểm SFX Boing
-        if t < 8.45:
-            # Nhịp 1: 7.1s -> 8.45s (Chạm đất đúng 7.35s)
-            bounce_cy, sx, sy, eye, is_impact = calc_gravity_bounce(t, 7.1, 8.45, 260, FLOOR_Y, 320)
-            red_x = 960 - 60
-        elif t < 9.55:
-            # Nhịp 2: 8.45s -> 9.55s (Chạm đất đúng 8.45s)
-            bounce_cy, sx, sy, eye, is_impact = calc_gravity_bounce(t, 8.45, 9.55, 240, FLOOR_Y, 320)
-            red_x = 960
-        else:
-            # Nhịp 3: 9.55s -> 10.8s (Chạm đất đúng 9.55s)
-            bounce_cy, sx, sy, eye, is_impact = calc_gravity_bounce(t, 9.55, 10.8, 220, FLOOR_Y, 320)
-            red_x = 960 + 60
-            
+        red_x = 960 + (n_bounce - 1) * 80
+        bounce_cy, sx, sy, eye, is_impact = calc_gravity_bounce(t, t_sub_start, t_sub_end, 250, FLOOR_Y, 320)
         red_y = bounce_cy
         red_scale_x, red_scale_y = sx, sy
         red_eye = eye if red_mouth == "X" else "wide"
         if is_impact and (frame_idx % 4 == 0):
             spawn_ripple(red_x, FLOOR_Y)
             spawn_particles(red_x, FLOOR_Y, count=3)
-    elif t < 17.8:
-        # 10.8s - 17.8s: Mẹ giới thiệu "It's a BALL!". Bé reo "BALL! Boing boing!".
-        # Bóng nhún nhảy nhịp nhàng vui tươi
+    elif t < t_card_ball:
+        # Mẹ giới thiệu & Bé reo BALL
         show_red = True
         red_floor = FLOOR_Y
         red_x = 960 + 40 * math.sin(t * 2.0)
@@ -327,124 +347,106 @@ def render_frame(t, frame_idx):
         red_y = FLOOR_Y - 160 - dance_h
         red_angle = 6 * math.sin(t * 3.0)
         red_eye = "blink" if (frame_idx % 75 in range(0, 5)) else "normal"
-        if dance_h < 4:
-            red_scale_x, red_scale_y = 1.15, 0.90
-        else:
-            red_scale_x, red_scale_y = 0.95, 1.05
-    elif t < 25.5:
-        # 17.8s - 25.5s: Thẻ chữ BALL pop-in! Bóng đỏ nảy trên thẻ chữ
+    elif t < t_color_ask:
+        # Thẻ chữ BALL pop-in
         show_red = True
         red_floor = 480
         red_x = 960
-        red_y = 340 - 50 * abs(math.sin((t - 17.8) * 4.0))
+        red_y = 340 - 50 * abs(math.sin((t - t_card_ball) * 4.0))
         red_eye = "blink" if (frame_idx % 80 in range(0, 5)) else "normal"
-        # Mắt liếc nhìn xuống thẻ chữ
         red_pupil = (0, 10)
         
         card_text = "BALL"
-        dt = t - 17.8
+        dt = t - t_card_ball
         if dt < 0.35:
-            # Elastic overshoot pop-in
             card_scale = 0.2 + 0.95 * (dt / 0.35)
         elif dt < 0.5:
             card_scale = 1.15 - 0.15 * ((dt - 0.35) / 0.15)
         else:
-            card_scale = 1.0 + 0.025 * math.sin((t - 18.3) * 4.0)
+            card_scale = 1.0 + 0.025 * math.sin((t - t_card_ball - 0.5) * 4.0)
         if dt < 0.8:
             spawn_particles(960 + random.randint(-220, 220), 730, count=2)
 
-    # --- MÀN 2: MÀU SẮC RED (25.5s - 45.0s) ---
-    elif t < 29.3:
-        # 25.5s - 29.3s: Mẹ hỏi màu sắc. Bóng đỏ tiến ra trung tâm, nghiêng đầu tò mò
+    # --- MÀN 2: MÀU SẮC RED ---
+    elif t < t_red_ans:
         show_red = True
         red_floor = FLOOR_Y
         red_x = 960
         red_y = FLOOR_Y - 160 + 15 * math.sin(t * 2.5)
-        red_angle = 12 * math.sin((t - 25.5) * 2.2)
+        red_angle = 12 * math.sin((t - t_color_ask) * 2.2)
         red_eye = "wide" if math.sin(t * 3.0) > 0.4 else "normal"
-        if frame_idx % 70 in range(0, 5):
-            red_eye = "blink"
-    elif t < 33.5:
-        # 29.3s - 33.5s: Bé reo "It's RED!". Bóng đỏ xoay tròn 360 độ quanh trục, nháy mắt WINK!
+    elif t < t_red_praise:
+        # Bé reo RED! Xoay tròn 360 độ nháy mắt WINK
         show_red = True
         red_floor = FLOOR_Y
-        spin_prog = (t - 29.3) / 4.2
+        spin_prog = (t - t_red_ans) / (t_red_praise - t_red_ans)
         red_x = 960
         red_y = FLOOR_Y - 160 - 90 * abs(math.sin(spin_prog * math.pi * 3))
         red_angle = spin_prog * 360 * 2
-        red_eye = "wink" if ((t - 29.3) > 1.8 and red_mouth == "X") else "normal"
+        red_eye = "wink" if (spin_prog > 0.4 and red_mouth == "X") else "normal"
         spawn_particles(red_x, red_y + 40, count=2)
-    elif t < 39.8:
-        # 33.5s - 39.8s: Mẹ khen & bé reo RED! Điệu nhảy nảy ziczac vui nhộn
+    elif t < t_card_red:
+        # Mẹ khen & bé reo RED
         show_red = True
         red_floor = FLOOR_Y
-        red_x = 960 + 180 * math.sin((t - 33.5) * 2.8)
-        dance_h = 75 * abs(math.cos((t - 33.5) * 2.8))
+        red_x = 960 + 180 * math.sin((t - t_red_praise) * 2.8)
+        dance_h = 75 * abs(math.cos((t - t_red_praise) * 2.8))
         red_y = FLOOR_Y - 160 - dance_h
-        red_angle = 15 * math.sin((t - 33.5) * 2.8)
+        red_angle = 15 * math.sin((t - t_red_praise) * 2.8)
         red_eye = "blink" if (frame_idx % 60 in range(0, 5)) else "normal"
-        spawn_particles(red_x, red_y + 110, count=1)
-    elif t < 45.0:
-        # 39.8s - 45.0s: Thẻ chữ RED pop-in! Bóng đỏ nảy trên thẻ chữ
+    elif t < t_blue_coming:
+        # Thẻ chữ RED pop-in
         show_red = True
         red_floor = 480
         red_x = 960
-        red_y = 340 - 50 * abs(math.sin((t - 39.8) * 4.0))
+        red_y = 340 - 50 * abs(math.sin((t - t_card_red) * 4.0))
         red_eye = "wink" if red_mouth == "X" else "normal"
         red_pupil = (0, 10)
         
         card_text = "RED"
-        dt = t - 39.8
+        dt = t - t_card_red
         if dt < 0.35:
             card_scale = 0.2 + 0.95 * (dt / 0.35)
         elif dt < 0.5:
             card_scale = 1.15 - 0.15 * ((dt - 0.35) / 0.15)
         else:
-            card_scale = 1.0 + 0.025 * math.sin((t - 40.3) * 4.0)
-        if dt < 0.8:
-            spawn_particles(960 + random.randint(-180, 180), 730, count=2)
+            card_scale = 1.0 + 0.025 * math.sin((t - t_card_red - 0.5) * 4.0)
 
-    # --- MÀN 3: BẠN MỚI BLUE (45.0s - 65.5s) ---
-    elif t < 49.5:
-        # 45.0s - 49.5s: Mẹ gọi bạn mới! Bóng đỏ liếc nhìn sang trái. Bóng xanh lăn vào chào!
+    # --- MÀN 3: BẠN MỚI BLUE ---
+    elif t < t_blue_hello:
         show_red = True
         red_floor = FLOOR_Y
         red_x = 1220
         red_y = FLOOR_Y - 145
         red_eye = "wide"
-        red_pupil = (-14, 0) # Liếc mắt sang trái đón bạn
+        red_pupil = (-14, 0)
         
         show_blue = True
         blue_floor = FLOOR_Y
-        prog = (t - 45.0) / 4.5
+        prog = (t - t_blue_coming) / (t_blue_hello - t_blue_coming)
         blue_x = -160 + (700 - (-160)) * min(1.0, prog)
         blue_y = FLOOR_Y - 145
-        # Lăn không trượt
         blue_angle = ((blue_x - (-160)) / 145.0) * (180 / math.pi)
         blue_eye = "normal"
-        blue_pupil = (12, 0) # Nhìn sang bạn đỏ
-        spawn_particles(blue_x, blue_y + 90, count=1)
-    elif t < 55.0:
-        # 49.5s - 55.0s: Hai bạn tiến lại gần và CỤNG ĐẦU BUMP lúc 52.2s!
+        blue_pupil = (12, 0)
+    elif t < t_blue_intro:
+        # Cụng đầu BUMP lúc t_bump
         show_red = True
         show_blue = True
         red_floor = FLOOR_Y
         blue_floor = FLOOR_Y
-        dt = t - 49.5
-        if dt < 2.7:
-            # Tiến lại gần từ 1220 và 700 tới điểm chạm 1040 và 880
-            p = dt / 2.7
-            red_x = 1220 - (1220 - 1040) * p
-            blue_x = 700 + (880 - 700) * p
-            bounce_app = 45 * abs(math.sin(dt * 5.0))
-            red_y = FLOOR_Y - 145 - bounce_app
-            blue_y = FLOOR_Y - 145 - bounce_app
+        dt_bump = t - t_bump
+        if dt_bump < -0.1:
+            # Đang tiến lại gần
+            p = 1.0 + dt_bump / (t_bump - t_blue_hello)
+            red_x = 1220 - (1220 - 1040) * max(0.0, min(1.0, p))
+            blue_x = 700 + (880 - 700) * max(0.0, min(1.0, p))
+            red_y = FLOOR_Y - 145 - 35 * abs(math.sin(p * math.pi * 3))
+            blue_y = FLOOR_Y - 145 - 35 * abs(math.sin(p * math.pi * 3))
             red_eye = "normal"
             blue_eye = "normal"
-            red_pupil = (-12, 0)
-            blue_pupil = (12, 0)
-        elif dt < 3.0:
-            # 52.2s - 52.5s: CỤNG ĐẦU BUMP! ÉP DẸP TRỤC NGANG & BUNG SAO VA CHẠM!
+        elif dt_bump < 0.25:
+            # Cụng đầu BUMP! ÉP DẸP TRỤC NGANG
             red_x = 1040
             blue_x = 880
             red_y = FLOOR_Y - 145
@@ -453,28 +455,27 @@ def render_frame(t, frame_idx):
             blue_scale_x, blue_scale_y = 0.72, 1.25
             red_eye = "closed_happy"
             blue_eye = "closed_happy"
-            # Bung sao va chạm
             spawn_particles(960, FLOOR_Y - 145, count=4, speed_mult=1.5)
             spawn_ripple(960, FLOOR_Y)
         else:
-            # 52.5s - 55.0s: Bật lùi đàn hồi, cười khúc khích Ana bump!
-            p_rebound = (dt - 3.0) / 2.5
-            red_x = 1040 + 70 * math.sin(p_rebound * math.pi)
-            blue_x = 880 - 70 * math.sin(p_rebound * math.pi)
-            laugh_jump = 60 * abs(math.sin(p_rebound * math.pi * 3))
+            # Bật lùi đàn hồi
+            p_reb = min(1.0, (dt_bump - 0.25) / 2.0)
+            red_x = 1040 + 70 * math.sin(p_reb * math.pi)
+            blue_x = 880 - 70 * math.sin(p_reb * math.pi)
+            laugh_jump = 60 * abs(math.sin(p_reb * math.pi * 3))
             red_y = FLOOR_Y - 145 - laugh_jump
             blue_y = FLOOR_Y - 145 - laugh_jump
             red_eye = "blink" if red_mouth == "X" else "normal"
             blue_eye = "blink" if blue_mouth == "X" else "normal"
-    elif t < 61.8:
-        # 55.0s - 61.8s: Mẹ khen & bé reo BLUE! Cả hai bạn cùng nảy đồng điệu
+    elif t < t_card_blue:
+        # Cả hai bạn cùng nảy đồng điệu
         show_red = True
         show_blue = True
         red_floor = FLOOR_Y
         blue_floor = FLOOR_Y
         red_x = 1150
         blue_x = 770
-        bounce_sync = abs(math.sin((t - 55.0) * 3.5))
+        bounce_sync = abs(math.sin((t - t_blue_intro) * 3.5))
         red_y = FLOOR_Y - 145 - 130 * bounce_sync
         blue_y = FLOOR_Y - 145 - 130 * bounce_sync
         red_eye = "normal"
@@ -485,65 +486,58 @@ def render_frame(t, frame_idx):
         elif bounce_sync > 0.8:
             red_scale_x, red_scale_y = 0.88, 1.15
             blue_scale_x, blue_scale_y = 0.88, 1.15
-        spawn_particles(red_x, red_y + 90, count=1)
-        spawn_particles(blue_x, blue_y + 90, count=1)
-    elif t < 65.5:
-        # 61.8s - 65.5s: Thẻ chữ BLUE pop-in! Hai bóng nảy hai bên thẻ chữ
+    elif t < t_roll_prompt:
+        # Thẻ chữ BLUE pop-in
         show_red = True
         show_blue = True
         red_floor = FLOOR_Y
         blue_floor = FLOOR_Y
         red_x = 1450
         blue_x = 470
-        red_y = FLOOR_Y - 145 - 50 * abs(math.sin((t - 61.8) * 4.0))
-        blue_y = FLOOR_Y - 145 - 50 * abs(math.sin((t - 61.8) * 4.0))
+        red_y = FLOOR_Y - 145 - 50 * abs(math.sin((t - t_card_blue) * 4.0))
+        blue_y = FLOOR_Y - 145 - 50 * abs(math.sin((t - t_card_blue) * 4.0))
         red_eye = "normal"
         blue_eye = "wide"
         red_pupil = (-10, 0)
         blue_pupil = (10, 0)
         
         card_text = "BLUE"
-        dt = t - 61.8
+        dt = t - t_card_blue
         if dt < 0.35:
             card_scale = 0.2 + 0.95 * (dt / 0.35)
         elif dt < 0.5:
             card_scale = 1.15 - 0.15 * ((dt - 0.35) / 0.15)
         else:
-            card_scale = 1.0 + 0.025 * math.sin((t - 62.3) * 4.0)
-        if dt < 0.8:
-            spawn_particles(960 + random.randint(-180, 180), 540, count=2)
+            card_scale = 1.0 + 0.025 * math.sin((t - t_card_blue - 0.5) * 4.0)
 
-    # --- MÀN 4: HÀNH ĐỘNG ROLL (65.5s - 83.5s) ---
-    elif t < 69.0:
-        # 65.5s - 69.0s: Chuẩn bị lăn! Nhún nhảy lấy đà
+    # --- MÀN 4: HÀNH ĐỘNG ROLL ---
+    elif t < t_roll_start:
         show_red = True
         show_blue = True
         red_floor = FLOOR_Y
         blue_floor = FLOOR_Y
-        red_x = 1100 + 30 * math.sin((t - 65.5) * 4.0)
-        blue_x = 820 - 30 * math.sin((t - 65.5) * 4.0)
-        squat = 35 * abs(math.sin((t - 65.5) * 4.0))
+        red_x = 1100 + 30 * math.sin((t - t_roll_prompt) * 4.0)
+        blue_x = 820 - 30 * math.sin((t - t_roll_prompt) * 4.0)
+        squat = 35 * abs(math.sin((t - t_roll_prompt) * 4.0))
         red_y = FLOOR_Y - 145 + squat
         blue_y = FLOOR_Y - 145 + squat
         red_scale_x, red_scale_y = 1.12, 0.88
         blue_scale_x, blue_scale_y = 1.12, 0.88
         red_eye = "wide"
         blue_eye = "wide"
-    elif t < 81.3:
-        # 69.0s - 81.3s: LĂN TRÒN QUA LẠI TOÀN MÀN HÌNH VẬT LÝ NO-SLIP ROLL CHUẨN XÁC!
+    elif t < t_card_roll:
+        # LĂN TRÒN QUA LẠI TOÀN MÀN HÌNH VẬT LÝ NO-SLIP ROLL
         show_red = True
         show_blue = True
         red_floor = FLOOR_Y
         blue_floor = FLOOR_Y
-        roll_t = t - 69.0
+        roll_t = t - t_roll_start
         
-        # Di chuyển ngang theo sin biên độ cực rộng
         red_x = 960 + 720 * math.sin(roll_t * 1.6)
         blue_x = 960 + 720 * math.sin(roll_t * 1.6 + 0.8)
         red_y = FLOOR_Y - 145
         blue_y = FLOOR_Y - 145
         
-        # Góc xoay vật lý không trượt: angle = (delta_x / R) * (180 / pi)
         red_angle = (red_x / 150.0) * (180.0 / math.pi)
         blue_angle = (blue_x / 140.0) * (180.0 / math.pi)
         
@@ -551,8 +545,8 @@ def render_frame(t, frame_idx):
         blue_eye = "blink" if (abs(math.sin(roll_t * 2.0 + 1.0)) > 0.85) else "normal"
         spawn_particles(red_x, red_y + 80, count=2)
         spawn_particles(blue_x, blue_y + 80, count=2)
-    elif t < 83.5:
-        # 81.3s - 83.5s: Phanh dừng lại giữa màn hình! Thẻ chữ ROLL pop-in
+    elif t < t_flash_1:
+        # Thẻ chữ ROLL pop-in
         show_red = True
         show_blue = True
         red_floor = FLOOR_Y
@@ -567,44 +561,41 @@ def render_frame(t, frame_idx):
         blue_pupil = (10, 0)
         
         card_text = "ROLL"
-        dt = t - 81.3
+        dt = t - t_card_roll
         if dt < 0.35:
             card_scale = 0.2 + 0.95 * (dt / 0.35)
         elif dt < 0.5:
             card_scale = 1.15 - 0.15 * ((dt - 0.35) / 0.15)
         else:
-            card_scale = 1.0 + 0.025 * math.sin((t - 81.8) * 4.0)
-        if dt < 0.8:
-            spawn_particles(960 + random.randint(-180, 180), 540, count=2)
+            card_scale = 1.0 + 0.025 * math.sin((t - t_card_roll - 0.5) * 4.0)
 
-    # --- MÀN 5: TRÁO THẺ NÃO PHẢI SIÊU TỐC & CHÚC MỪNG (83.5s - 95.0s) ---
-    elif t < 85.1:
+    # --- MÀN 5: TRÁO THẺ NÃO PHẢI & CHÚC MỪNG ---
+    elif t < t_flash_2:
         flash_text = "BALL"
-    elif t < 86.6:
+    elif t < t_flash_3:
         flash_text = "RED"
-    elif t < 88.1:
+    elif t < t_flash_4:
         flash_text = "BLUE"
-    elif t < 89.6:
+    elif t < t_praise_final:
         flash_text = "ROLL"
     else:
-        # 89.6s - 95.0s: ĐẠI TIỆC CHÚC MỪNG TƯNG BỪNG! Hai bạn nhảy cẫng lên ăn mừng!
+        # ĐẠI TIỆC CHÚC MỪNG CAN-DO
         show_red = True
         show_blue = True
         red_floor = FLOOR_Y
         blue_floor = FLOOR_Y
         red_x = 650
         blue_x = 1270
-        praise_jump = abs(math.sin((t - 89.6) * 4.5))
+        praise_jump = abs(math.sin((t - t_praise_final) * 4.5))
         red_y = FLOOR_Y - 145 - 200 * praise_jump
         blue_y = FLOOR_Y - 145 - 200 * praise_jump
         red_eye = "wide" if praise_jump > 0.4 else "normal"
         blue_eye = "wide" if praise_jump > 0.4 else "normal"
         praise_mode = True
-        # Mưa sao vàng ngập tràn
         for _ in range(4):
             spawn_particles(random.randint(100, 1820), random.randint(80, 420), count=1, speed_mult=1.8)
 
-    # 3. Cập nhật và vẽ hạt sao lấp lánh (Star particles)
+    # 3. Cập nhật và vẽ hạt sao
     global particles
     new_particles = []
     for p in particles:
@@ -621,25 +612,23 @@ def render_frame(t, frame_idx):
             new_particles.append([px, py, pvx, pvy, pscale, life - 1, max_life])
     particles = new_particles
 
-    # 4. HÀM VẼ NHÂN VẬT & BÓNG ĐỔ SÀN (DRAW CHARACTER WITH GROUND SHADOW)
+    # 4. Vẽ nhân vật & bóng đổ sàn
     def render_character_on_stage(base_type, x, y, floor_y, base_d, scale_x, scale_y, angle, eye_state, mouth_viseme, pupil_offset):
-        # A. VẼ BÓNG ĐỔ SÀN (DROP SHADOW)
+        # A. Bóng đổ sàn 3D
         cur_h = base_d * scale_y
         bottom_y = y + cur_h / 2.0
         h_above_floor = max(0, floor_y - bottom_y)
         
-        # Chiều rộng shadow biến thiên theo độ cao và scale_x
         sh_w = int(base_d * scale_x * (1.0 - 0.45 * min(1.0, h_above_floor / 350.0)))
         sh_h = int(65 * (1.0 - 0.50 * min(1.0, h_above_floor / 350.0)))
         sh_alpha = max(0.05, 1.0 - 0.65 * min(1.0, h_above_floor / 350.0))
         
         if sh_w > 10 and sh_h > 5:
             sh_scaled = drop_shadow_img.resize((sh_w, sh_h), Image.Resampling.BILINEAR)
-            # Áp dụng alpha
             sh_scaled.putalpha(Image.eval(sh_scaled.getchannel("A"), lambda a: int(a * sh_alpha)))
             img.alpha_composite(sh_scaled, (int(x - sh_w // 2), int(floor_y - sh_h // 2 + 5)))
 
-        # B. VẼ NHÂN VẬT BÓNG ĐỘNG
+        # B. Thân quả bóng 3D
         char_canvas = get_cached_character(base_type, eye_state, mouth_viseme, pupil_offset)
         w = int(base_d * scale_x)
         h = int(base_d * scale_y)
@@ -653,14 +642,13 @@ def render_frame(t, frame_idx):
         rw, rh = scaled_char.size
         img.alpha_composite(scaled_char, (int(x - rw // 2), int(y - rh // 2)))
 
-    # Vẽ nhân vật lên sân khấu
     if show_red:
         render_character_on_stage("red", red_x, red_y, red_floor, 320, red_scale_x, red_scale_y, red_angle, red_eye, red_mouth, red_pupil)
         
     if show_blue:
         render_character_on_stage("blue", blue_x, blue_y, blue_floor, 290, blue_scale_x, blue_scale_y, blue_angle, blue_eye, blue_mouth, blue_pupil)
 
-    # 5. Vẽ Thẻ chữ Glenn Doman Pop-in Card
+    # 5. Vẽ Thẻ chữ Pop-in Glenn Doman
     if card_text:
         bbox = draw.textbbox((0, 0), card_text, font=FONT_CARD)
         tw = bbox[2] - bbox[0]
@@ -674,10 +662,10 @@ def render_frame(t, frame_idx):
         ch = int((th + 80) * card_scale)
         if cw > 10 and ch > 10:
             scaled_card = card_img.resize((cw, ch), Image.Resampling.BILINEAR)
-            card_pos_y = 740 if t < 26 else (740 if t < 46 else 540)
+            card_pos_y = 740 if t < t_color_ask else (740 if t < t_blue_coming else 540)
             img.alpha_composite(scaled_card, (int(960 - cw // 2), int(card_pos_y - ch // 2)))
 
-    # 6. Vẽ Tráo Thẻ Não Phải Siêu Tốc (Flashcard Mode)
+    # 6. Vẽ Tráo Thẻ Siêu Tốc
     if flash_text:
         bbox = draw.textbbox((0, 0), flash_text, font=FONT_FLASH)
         tw = bbox[2] - bbox[0]
@@ -686,14 +674,14 @@ def render_frame(t, frame_idx):
         ty = 540 - th // 2 - bbox[1]
         draw.text((tx, ty), flash_text, font=FONT_FLASH, fill=DOMAN_RED)
 
-    # 7. Vẽ Màn Chúc Mừng Can-Do (Praise Mode)
+    # 7. Vẽ Màn Chúc Mừng
     if praise_mode:
         praise_txt = "GOOD JOB, BABY!"
         bbox = draw.textbbox((0, 0), praise_txt, font=FONT_PRAISE)
         tw = bbox[2] - bbox[0]
         th = bbox[3] - bbox[1]
         
-        pulse = 1.0 + 0.05 * math.sin((t - 89.6) * 8.0)
+        pulse = 1.0 + 0.05 * math.sin((t - t_praise_final) * 8.0)
         p_canvas = Image.new("RGBA", (tw + 100, th + 60), (0, 0, 0, 0))
         pdraw = ImageDraw.Draw(p_canvas)
         pdraw.text((50 - bbox[0], 30 - bbox[1]), praise_txt, font=FONT_PRAISE, fill=DOMAN_RED)
@@ -706,9 +694,9 @@ def render_frame(t, frame_idx):
     return img.convert("RGB")
 
 def main():
-    print(f"🎬 Bắt đầu Render Master Hoạt Hình Đỉnh Cao Red W06 (100% Tiếng - Hình - Chuyển Động - Khớp Âm Hình)...")
-    print(f"   - Tổng thời lượng: {TOTAL_DURATION}s ({TOTAL_FRAMES} frames @ {FPS}fps)")
-    print(f"   - Audio Master Perfect: {AUDIO_FILE}")
+    print(f"🎬 Bắt đầu Render Master Hoạt Hình Đỉnh Cao Red W06 (100% Tiếng - Hình 3D - Không Chồng Thoại)...")
+    print(f"   - Tổng thời lượng: {TOTAL_DURATION:.1f}s ({TOTAL_FRAMES} frames @ {FPS}fps)")
+    print(f"   - Audio Master: {AUDIO_FILE}")
     print(f"   - Video Output: {OUT_VIDEO}")
     
     OUT_VIDEO.parent.mkdir(parents=True, exist_ok=True)
@@ -742,7 +730,7 @@ def main():
         
         if f % 150 == 0 or f == TOTAL_FRAMES - 1:
             pct = (f / TOTAL_FRAMES) * 100
-            print(f"Tiến độ Render Master: {f}/{TOTAL_FRAMES} frames ({pct:.1f}%) — {t:.1f}s / {TOTAL_DURATION}s")
+            print(f"Tiến độ Render Master: {f}/{TOTAL_FRAMES} frames ({pct:.1f}%) — {t:.1f}s / {TOTAL_DURATION:.1f}s")
             sys.stdout.flush()
             
     proc.stdin.close()

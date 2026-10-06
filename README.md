@@ -5,25 +5,29 @@
 
 ---
 
-## 🎬 SẢN PHẨM MASTER VIDEO & LINK XEM TRỰC TIẾP (LIVE MASTER ANIMATION)
+## 🚀 ĐỘT PHÁ MỚI: HOẠT HÌNH KHỐI PURPLE (4-5 TUỔI) — TIKTOK RETENTION STYLE (< 3S SCENE CUT)
 
-> 📺 **Bấm vào link bên dưới để xem trực tiếp video phim hoạt hình chuẩn phát sóng quốc tế trên GitHub**:
-> - 🎥 **Master Video Khối Red - Tuần 6 (W06)**: [demo_W06_Red_Master_Animation_5min.mp4](demo_products/demo_W06_Red_Master_Animation_5min.mp4)  
->   *(Chủ đề: "A Familiar Ball in a New Place" — Thời lượng: **5 phút 19 giây**, 1080p Full HD 30fps, Chuẩn EBU R128 -14.0 LUFS, Chuyển động Ken Burns 3D Pixar, Lồng tiếng 5 nhân vật US Motherese)*
-> - 📜 **Chứng chỉ Giám định Toàn trình AI Agent V2**: [CERTIFICATE_AUDIT_MASTER_W06_5MIN.md](demo_products/CERTIFICATE_AUDIT_MASTER_W06_5MIN.md) (Điểm: **100.0/100 - CERTIFIED APPROVED**)
-> - 🏷️ **Phiên bản phát hành chính thức (Release v1.1.0)**: [GitHub Release v1.1.0](https://github.com/nguyenvutnt/preschool-animation-factory/releases/tag/v1.1.0)
+> 🎥 **Video Demo Khối Purple W06 (66.8 giây — 1080p 30fps)**: [demo_W06_Purple_TikTok_Vocabulary.mp4](demo_products/demo_W06_Purple_TikTok_Vocabulary.mp4)  
+> 🌐 **Web Player HTML5 Trực Quan & Tải Ngay (Caddy CDN)**: [https://bot.eyc.asia/v-c0e8efc0d44cce2e3794ff0fff190b87/purple-w06-tiktok/](https://bot.eyc.asia/v-c0e8efc0d44cce2e3794ff0fff190b87/purple-w06-tiktok/)  
+> 📜 **Chứng chỉ Kiểm định AI Agent V2**: [CERTIFICATE_AUDIT_PURPLE_W06_TIKTOK_100.md](demo_products/CERTIFICATE_AUDIT_PURPLE_W06_TIKTOK_100.md) (Điểm: **100/100 - XUẤT SẮC**)  
+> 
+> **Đặc trưng giữ chân trẻ từng giây theo thuật toán TikTok / Reels**:
+> 1. **MEGA HOOK (0 - 3s)**: Cổng ma thuật Tím Neon mở tung + Thỏ Tím nhào lộn BUMP + Giật tít âm thanh lôi cuốn trẻ ngay từ giây đầu tiên.
+> 2. **Pacing Thần Tốc (< 3s Đổi Cảnh)**: 18 phân cảnh trong 66.8s (Trung bình 2.6s - 3.3s/cảnh; Rapid Recap < 1.5s/từ), liên tục đổi góc máy và bảng màu nền.
+> 3. **4 Giọng Lồng Tiếng Mỹ & 100% Không Chồng Thoại**: Thầy David, Cô Sarah, Thỏ Tím Leo, Bé Mia đối đáp nhịp nhàng, giọng diễn tràn đầy cảm xúc.
+> 4. **Màu Sắc Bắt Mắt Khối Purple**: Tím Neon (#8B5CF6), Vàng Cam (#FBBF24), Xanh Ngọc Cyan (#06B6D4) rực rỡ, tương phản cao.
+> 5. **Hiệu Ứng Kinetic Motion**: Camera Zoom-in, Elastic Bounce, Starburst nổ tung, Confetti ăn mừng, Lip-sync Rhubarb 100% khớp âm thanh.
+> 6. **Chuẩn Sư Phạm True English W06 (Activity 2 & 3)**: Khắc sâu 4 địa điểm *CLASSROOM, LIBRARY, PLAYGROUND, ART ROOM* cùng hành động *LEARN, READ, PLAY, PAINT*.
 
-### 📸 Hình Ảnh Tiêu Biểu Trong Phim Hoạt Hình 5 Giai Đoạn Sư Phạm (Early Years 5-Phase)
+### 📸 Bằng Chứng Thị Giác Khối Purple (Snapshots)
 
-| 1. Đón Trẻ Đến Trường (0:15) | 2. Dạy Luân Phiên Bóng Lăn (1:15) | 3. Xây Tháp Khối Gỗ (2:25) |
-| :---: | :---: | :---: |
-| ![Arrival](demo_products/snapshot_master_01_arrival.jpg) | ![Ball Play](demo_products/snapshot_master_03_ball_play.jpg) | ![Blocks](demo_products/snapshot_master_05_block_building.jpg) |
-| *Giai đoạn 1: Khởi động Parentese* | *Giai đoạn 2: Luyện giao tiếp chia sẻ* | *Giai đoạn 3: Vận động & Hợp tác* |
+| 1. Mega Hook Cổng Tím Neon (1.5s) | 2. Thẻ Chữ CLASSROOM (7.5s) | 3. Hành Động LEARN (15.5s) | 4. Thư Viện LIBRARY (24.5s) |
+| :---: | :---: | :---: | :---: |
+| ![Hook](docs/purple_w06_tiktok/snapshots/01_mega_hook_neon_door.jpg) | ![Classroom](docs/purple_w06_tiktok/snapshots/02_scene_classroom_card.jpg) | ![Learn](docs/purple_w06_tiktok/snapshots/03_scene_classroom_action.jpg) | ![Library](docs/purple_w06_tiktok/snapshots/04_scene_library_card.jpg) |
 
-| 4. Kể Chuyện Thỏ Trắng & Gấu Con (3:25) | 5. Tuyên Dương Can-Do & Ru Ngủ (4:15) |
-| :---: | :---: |
-| ![Story](demo_products/snapshot_master_07_story_bunny.jpg) | ![Friendship Tree](demo_products/snapshot_master_09_friendship_tree.jpg) |
-| *Giai đoạn 4: Storybook Read-Along tương tác* | *Giai đoạn 5: Tuyên dương Can-Do & Ru ngủ* |
+| 5. Sân Chơi PLAYGROUND (34.5s) | 6. Phòng Vẽ ART ROOM (43.5s) | 7. Rapid Recap TikTok (52.5s) | 8. Starburst Ăn Mừng (61.5s) |
+| :---: | :---: | :---: | :---: |
+| ![Playground](docs/purple_w06_tiktok/snapshots/05_scene_playground_card.jpg) | ![Art Room](docs/purple_w06_tiktok/snapshots/06_scene_artroom_card.jpg) | ![Recap](docs/purple_w06_tiktok/snapshots/07_scene_fast_recap.jpg) | ![Celebration](docs/purple_w06_tiktok/snapshots/08_scene_celebration_confetti.jpg) |
 
 ---
 
