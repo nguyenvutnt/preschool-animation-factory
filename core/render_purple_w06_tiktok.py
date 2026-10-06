@@ -20,14 +20,16 @@ import sys
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
-# 1. ĐƯỜNG DẪN TÀI NGUYÊN
+# 1. ĐƯỜNG DẪN TÀI NGUYÊN (TỰ NẠP NỘI BỘ REPO HOẶC SCRATCH)
+REPO_ROOT = Path(__file__).resolve().parent.parent
 BASE_DIR = Path("/root/scratch/purple_w06_tiktok")
-ASSETS_DIR = BASE_DIR / "assets"
-RAW_DIR = BASE_DIR / "raw"
-AUDIO_FILE = BASE_DIR / "master_audio.mp3"
-MANIFEST_FILE = BASE_DIR / "manifest.json"
-VISEMES_FILE = BASE_DIR / "visemes.json"
-OUT_VIDEO = Path("/root/preschool-animation-factory/demo_products/demo_W06_Purple_TikTok_Vocabulary.mp4")
+RES_DIR = REPO_ROOT / "res" / "purple_w06"
+
+ASSETS_DIR = REPO_ROOT / "assets" / "purple" if (REPO_ROOT / "assets" / "purple").exists() else BASE_DIR / "assets"
+AUDIO_FILE = RES_DIR / "master_audio.mp3" if (RES_DIR / "master_audio.mp3").exists() else BASE_DIR / "master_audio.mp3"
+MANIFEST_FILE = RES_DIR / "manifest.json" if (RES_DIR / "manifest.json").exists() else BASE_DIR / "manifest.json"
+VISEMES_FILE = RES_DIR / "visemes.json" if (RES_DIR / "visemes.json").exists() else BASE_DIR / "visemes.json"
+OUT_VIDEO = REPO_ROOT / "demo_products" / "demo_W06_Purple_TikTok_Vocabulary.mp4"
 
 # Phông chữ bo tròn mầm non Quicksand Bold
 FONT_PATH = "/usr/share/fonts/truetype/quicksand/Quicksand-Bold.ttf"

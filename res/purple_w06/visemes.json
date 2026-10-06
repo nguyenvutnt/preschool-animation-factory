@@ -1,0 +1,1438 @@
+{
+  "01_sarah_hook.mp3": [
+    {
+      "start": 0.0,
+      "end": 0.18,
+      "value": "X"
+    },
+    {
+      "start": 0.18,
+      "end": 0.23,
+      "value": "B"
+    },
+    {
+      "start": 0.23,
+      "end": 0.28,
+      "value": "C"
+    },
+    {
+      "start": 0.28,
+      "end": 0.65,
+      "value": "B"
+    },
+    {
+      "start": 0.65,
+      "end": 0.71,
+      "value": "C"
+    },
+    {
+      "start": 0.71,
+      "end": 0.84,
+      "value": "E"
+    },
+    {
+      "start": 0.84,
+      "end": 0.91,
+      "value": "F"
+    },
+    {
+      "start": 0.91,
+      "end": 1.65,
+      "value": "X"
+    },
+    {
+      "start": 1.65,
+      "end": 2.1,
+      "value": "C"
+    },
+    {
+      "start": 2.1,
+      "end": 2.24,
+      "value": "B"
+    },
+    {
+      "start": 2.24,
+      "end": 2.32,
+      "value": "A"
+    },
+    {
+      "start": 2.32,
+      "end": 2.46,
+      "value": "C"
+    },
+    {
+      "start": 2.46,
+      "end": 2.53,
+      "value": "B"
+    },
+    {
+      "start": 2.53,
+      "end": 2.74,
+      "value": "F"
+    },
+    {
+      "start": 2.74,
+      "end": 2.82,
+      "value": "A"
+    },
+    {
+      "start": 2.82,
+      "end": 2.98,
+      "value": "H"
+    },
+    {
+      "start": 2.98,
+      "end": 3.05,
+      "value": "C"
+    },
+    {
+      "start": 3.05,
+      "end": 3.26,
+      "value": "B"
+    },
+    {
+      "start": 3.26,
+      "end": 4.1,
+      "value": "X"
+    }
+  ],
+  "02_david_door1.mp3": [
+    {
+      "start": 0.0,
+      "end": 0.14,
+      "value": "X"
+    },
+    {
+      "start": 0.14,
+      "end": 0.18,
+      "value": "H"
+    },
+    {
+      "start": 0.18,
+      "end": 0.29,
+      "value": "C"
+    },
+    {
+      "start": 0.29,
+      "end": 0.43,
+      "value": "B"
+    },
+    {
+      "start": 0.43,
+      "end": 0.57,
+      "value": "E"
+    },
+    {
+      "start": 0.57,
+      "end": 0.64,
+      "value": "C"
+    },
+    {
+      "start": 0.64,
+      "end": 0.72,
+      "value": "A"
+    },
+    {
+      "start": 0.72,
+      "end": 0.82,
+      "value": "E"
+    },
+    {
+      "start": 0.82,
+      "end": 0.96,
+      "value": "F"
+    },
+    {
+      "start": 0.96,
+      "end": 1.1,
+      "value": "C"
+    },
+    {
+      "start": 1.1,
+      "end": 1.48,
+      "value": "X"
+    },
+    {
+      "start": 1.48,
+      "end": 1.53,
+      "value": "F"
+    },
+    {
+      "start": 1.53,
+      "end": 1.92,
+      "value": "B"
+    },
+    {
+      "start": 1.92,
+      "end": 1.99,
+      "value": "C"
+    },
+    {
+      "start": 1.99,
+      "end": 2.13,
+      "value": "B"
+    },
+    {
+      "start": 2.13,
+      "end": 2.4,
+      "value": "X"
+    }
+  ],
+  "03_leo_classroom.mp3": [
+    {
+      "start": 0.0,
+      "end": 0.15,
+      "value": "X"
+    },
+    {
+      "start": 0.15,
+      "end": 0.39,
+      "value": "B"
+    },
+    {
+      "start": 0.39,
+      "end": 0.46,
+      "value": "C"
+    },
+    {
+      "start": 0.46,
+      "end": 0.67,
+      "value": "H"
+    },
+    {
+      "start": 0.67,
+      "end": 0.81,
+      "value": "C"
+    },
+    {
+      "start": 0.81,
+      "end": 1.09,
+      "value": "F"
+    },
+    {
+      "start": 1.09,
+      "end": 1.19,
+      "value": "A"
+    },
+    {
+      "start": 1.19,
+      "end": 2.05,
+      "value": "X"
+    },
+    {
+      "start": 2.05,
+      "end": 2.2,
+      "value": "B"
+    },
+    {
+      "start": 2.2,
+      "end": 2.27,
+      "value": "C"
+    },
+    {
+      "start": 2.27,
+      "end": 2.46,
+      "value": "D"
+    },
+    {
+      "start": 2.46,
+      "end": 2.51,
+      "value": "C"
+    },
+    {
+      "start": 2.51,
+      "end": 2.69,
+      "value": "B"
+    },
+    {
+      "start": 2.69,
+      "end": 2.9,
+      "value": "C"
+    },
+    {
+      "start": 2.9,
+      "end": 3.74,
+      "value": "X"
+    }
+  ],
+  "04_mia_say_classroom.mp3": [
+    {
+      "start": 0.0,
+      "end": 0.17,
+      "value": "X"
+    },
+    {
+      "start": 0.17,
+      "end": 0.27,
+      "value": "G"
+    },
+    {
+      "start": 0.27,
+      "end": 0.41,
+      "value": "C"
+    },
+    {
+      "start": 0.41,
+      "end": 0.55,
+      "value": "B"
+    },
+    {
+      "start": 0.55,
+      "end": 0.83,
+      "value": "C"
+    },
+    {
+      "start": 0.83,
+      "end": 1.77,
+      "value": "X"
+    },
+    {
+      "start": 1.77,
+      "end": 1.82,
+      "value": "C"
+    },
+    {
+      "start": 1.82,
+      "end": 2.0,
+      "value": "E"
+    },
+    {
+      "start": 2.0,
+      "end": 2.07,
+      "value": "F"
+    },
+    {
+      "start": 2.07,
+      "end": 2.49,
+      "value": "B"
+    },
+    {
+      "start": 2.49,
+      "end": 2.54,
+      "value": "G"
+    },
+    {
+      "start": 2.54,
+      "end": 2.72,
+      "value": "C"
+    },
+    {
+      "start": 2.72,
+      "end": 2.86,
+      "value": "B"
+    },
+    {
+      "start": 2.86,
+      "end": 3.14,
+      "value": "C"
+    },
+    {
+      "start": 3.14,
+      "end": 3.93,
+      "value": "X"
+    }
+  ],
+  "05_david_door2.mp3": [
+    {
+      "start": 0.0,
+      "end": 0.07,
+      "value": "X"
+    },
+    {
+      "start": 0.07,
+      "end": 0.14,
+      "value": "B"
+    },
+    {
+      "start": 0.14,
+      "end": 0.27,
+      "value": "E"
+    },
+    {
+      "start": 0.27,
+      "end": 0.34,
+      "value": "C"
+    },
+    {
+      "start": 0.34,
+      "end": 0.42,
+      "value": "A"
+    },
+    {
+      "start": 0.42,
+      "end": 0.74,
+      "value": "F"
+    },
+    {
+      "start": 0.74,
+      "end": 1.13,
+      "value": "X"
+    },
+    {
+      "start": 1.13,
+      "end": 1.39,
+      "value": "F"
+    },
+    {
+      "start": 1.39,
+      "end": 1.78,
+      "value": "X"
+    },
+    {
+      "start": 1.78,
+      "end": 1.96,
+      "value": "B"
+    },
+    {
+      "start": 1.96,
+      "end": 2.1,
+      "value": "C"
+    },
+    {
+      "start": 2.1,
+      "end": 2.42,
+      "value": "X"
+    }
+  ],
+  "06_sarah_library.mp3": [
+    {
+      "start": 0.0,
+      "end": 0.18,
+      "value": "X"
+    },
+    {
+      "start": 0.18,
+      "end": 0.23,
+      "value": "B"
+    },
+    {
+      "start": 0.23,
+      "end": 0.28,
+      "value": "C"
+    },
+    {
+      "start": 0.28,
+      "end": 0.35,
+      "value": "H"
+    },
+    {
+      "start": 0.35,
+      "end": 0.42,
+      "value": "C"
+    },
+    {
+      "start": 0.42,
+      "end": 0.53,
+      "value": "A"
+    },
+    {
+      "start": 0.53,
+      "end": 0.6,
+      "value": "B"
+    },
+    {
+      "start": 0.6,
+      "end": 0.67,
+      "value": "C"
+    },
+    {
+      "start": 0.67,
+      "end": 0.88,
+      "value": "B"
+    },
+    {
+      "start": 0.88,
+      "end": 1.78,
+      "value": "X"
+    },
+    {
+      "start": 1.78,
+      "end": 2.0,
+      "value": "B"
+    },
+    {
+      "start": 2.0,
+      "end": 2.14,
+      "value": "E"
+    },
+    {
+      "start": 2.14,
+      "end": 2.21,
+      "value": "B"
+    },
+    {
+      "start": 2.21,
+      "end": 2.29,
+      "value": "A"
+    },
+    {
+      "start": 2.29,
+      "end": 2.45,
+      "value": "F"
+    },
+    {
+      "start": 2.45,
+      "end": 2.73,
+      "value": "B"
+    },
+    {
+      "start": 2.73,
+      "end": 3.55,
+      "value": "X"
+    }
+  ],
+  "07_leo_read_library.mp3": [
+    {
+      "start": 0.0,
+      "end": 0.17,
+      "value": "X"
+    },
+    {
+      "start": 0.17,
+      "end": 0.23,
+      "value": "C"
+    },
+    {
+      "start": 0.23,
+      "end": 0.36,
+      "value": "B"
+    },
+    {
+      "start": 0.36,
+      "end": 0.57,
+      "value": "C"
+    },
+    {
+      "start": 0.57,
+      "end": 0.71,
+      "value": "G"
+    },
+    {
+      "start": 0.71,
+      "end": 0.79,
+      "value": "A"
+    },
+    {
+      "start": 0.79,
+      "end": 1.33,
+      "value": "B"
+    },
+    {
+      "start": 1.33,
+      "end": 1.4,
+      "value": "H"
+    },
+    {
+      "start": 1.4,
+      "end": 1.47,
+      "value": "C"
+    },
+    {
+      "start": 1.47,
+      "end": 1.61,
+      "value": "A"
+    },
+    {
+      "start": 1.61,
+      "end": 1.69,
+      "value": "B"
+    },
+    {
+      "start": 1.69,
+      "end": 1.76,
+      "value": "C"
+    },
+    {
+      "start": 1.76,
+      "end": 1.97,
+      "value": "B"
+    },
+    {
+      "start": 1.97,
+      "end": 2.78,
+      "value": "X"
+    }
+  ],
+  "08_both_library.mp3": [
+    {
+      "start": 0.0,
+      "end": 0.24,
+      "value": "X"
+    },
+    {
+      "start": 0.24,
+      "end": 0.32,
+      "value": "C"
+    },
+    {
+      "start": 0.32,
+      "end": 0.46,
+      "value": "A"
+    },
+    {
+      "start": 0.46,
+      "end": 0.53,
+      "value": "B"
+    },
+    {
+      "start": 0.53,
+      "end": 0.67,
+      "value": "C"
+    },
+    {
+      "start": 0.67,
+      "end": 0.81,
+      "value": "B"
+    },
+    {
+      "start": 0.81,
+      "end": 1.69,
+      "value": "X"
+    },
+    {
+      "start": 1.69,
+      "end": 1.74,
+      "value": "H"
+    },
+    {
+      "start": 1.74,
+      "end": 1.86,
+      "value": "C"
+    },
+    {
+      "start": 1.86,
+      "end": 2.22,
+      "value": "B"
+    },
+    {
+      "start": 2.22,
+      "end": 2.26,
+      "value": "H"
+    },
+    {
+      "start": 2.26,
+      "end": 2.37,
+      "value": "C"
+    },
+    {
+      "start": 2.37,
+      "end": 2.66,
+      "value": "B"
+    },
+    {
+      "start": 2.66,
+      "end": 2.73,
+      "value": "H"
+    },
+    {
+      "start": 2.73,
+      "end": 2.86,
+      "value": "C"
+    },
+    {
+      "start": 2.86,
+      "end": 2.93,
+      "value": "B"
+    },
+    {
+      "start": 2.93,
+      "end": 3.01,
+      "value": "A"
+    },
+    {
+      "start": 3.01,
+      "end": 3.17,
+      "value": "C"
+    },
+    {
+      "start": 3.17,
+      "end": 3.31,
+      "value": "B"
+    },
+    {
+      "start": 3.31,
+      "end": 4.1,
+      "value": "X"
+    }
+  ],
+  "09_david_whoosh.mp3": [
+    {
+      "start": 0.0,
+      "end": 0.14,
+      "value": "X"
+    },
+    {
+      "start": 0.14,
+      "end": 0.5,
+      "value": "F"
+    },
+    {
+      "start": 0.5,
+      "end": 0.91,
+      "value": "X"
+    },
+    {
+      "start": 0.91,
+      "end": 0.97,
+      "value": "F"
+    },
+    {
+      "start": 0.97,
+      "end": 1.02,
+      "value": "E"
+    },
+    {
+      "start": 1.02,
+      "end": 1.09,
+      "value": "F"
+    },
+    {
+      "start": 1.09,
+      "end": 1.37,
+      "value": "B"
+    },
+    {
+      "start": 1.37,
+      "end": 1.51,
+      "value": "C"
+    },
+    {
+      "start": 1.51,
+      "end": 1.72,
+      "value": "B"
+    },
+    {
+      "start": 1.72,
+      "end": 2.01,
+      "value": "X"
+    }
+  ],
+  "10_mia_playground.mp3": [
+    {
+      "start": 0.0,
+      "end": 0.2,
+      "value": "X"
+    },
+    {
+      "start": 0.2,
+      "end": 0.25,
+      "value": "C"
+    },
+    {
+      "start": 0.25,
+      "end": 0.65,
+      "value": "B"
+    },
+    {
+      "start": 0.65,
+      "end": 0.72,
+      "value": "C"
+    },
+    {
+      "start": 0.72,
+      "end": 0.93,
+      "value": "B"
+    },
+    {
+      "start": 0.93,
+      "end": 1.78,
+      "value": "X"
+    },
+    {
+      "start": 1.78,
+      "end": 1.86,
+      "value": "B"
+    },
+    {
+      "start": 1.86,
+      "end": 1.93,
+      "value": "C"
+    },
+    {
+      "start": 1.93,
+      "end": 2.14,
+      "value": "B"
+    },
+    {
+      "start": 2.14,
+      "end": 2.9,
+      "value": "X"
+    }
+  ],
+  "11_leo_play.mp3": [
+    {
+      "start": 0.0,
+      "end": 0.18,
+      "value": "X"
+    },
+    {
+      "start": 0.18,
+      "end": 0.25,
+      "value": "C"
+    },
+    {
+      "start": 0.25,
+      "end": 0.38,
+      "value": "D"
+    },
+    {
+      "start": 0.38,
+      "end": 0.52,
+      "value": "B"
+    },
+    {
+      "start": 0.52,
+      "end": 0.74,
+      "value": "X"
+    },
+    {
+      "start": 0.74,
+      "end": 0.82,
+      "value": "B"
+    },
+    {
+      "start": 0.82,
+      "end": 0.96,
+      "value": "C"
+    },
+    {
+      "start": 0.96,
+      "end": 1.31,
+      "value": "B"
+    },
+    {
+      "start": 1.31,
+      "end": 1.45,
+      "value": "C"
+    },
+    {
+      "start": 1.45,
+      "end": 1.53,
+      "value": "A"
+    },
+    {
+      "start": 1.53,
+      "end": 1.71,
+      "value": "H"
+    },
+    {
+      "start": 1.71,
+      "end": 1.78,
+      "value": "C"
+    },
+    {
+      "start": 1.78,
+      "end": 1.99,
+      "value": "B"
+    },
+    {
+      "start": 1.99,
+      "end": 2.07,
+      "value": "A"
+    },
+    {
+      "start": 2.07,
+      "end": 2.23,
+      "value": "H"
+    },
+    {
+      "start": 2.23,
+      "end": 2.37,
+      "value": "C"
+    },
+    {
+      "start": 2.37,
+      "end": 2.44,
+      "value": "B"
+    },
+    {
+      "start": 2.44,
+      "end": 2.51,
+      "value": "C"
+    },
+    {
+      "start": 2.51,
+      "end": 2.58,
+      "value": "E"
+    },
+    {
+      "start": 2.58,
+      "end": 2.65,
+      "value": "C"
+    },
+    {
+      "start": 2.65,
+      "end": 2.72,
+      "value": "B"
+    },
+    {
+      "start": 2.72,
+      "end": 3.55,
+      "value": "X"
+    }
+  ],
+  "12_sarah_yes_playground.mp3": [
+    {
+      "start": 0.0,
+      "end": 0.19,
+      "value": "X"
+    },
+    {
+      "start": 0.19,
+      "end": 0.42,
+      "value": "C"
+    },
+    {
+      "start": 0.42,
+      "end": 0.63,
+      "value": "B"
+    },
+    {
+      "start": 0.63,
+      "end": 1.39,
+      "value": "X"
+    },
+    {
+      "start": 1.39,
+      "end": 1.51,
+      "value": "A"
+    },
+    {
+      "start": 1.51,
+      "end": 1.58,
+      "value": "H"
+    },
+    {
+      "start": 1.58,
+      "end": 1.71,
+      "value": "C"
+    },
+    {
+      "start": 1.71,
+      "end": 1.78,
+      "value": "B"
+    },
+    {
+      "start": 1.78,
+      "end": 1.85,
+      "value": "C"
+    },
+    {
+      "start": 1.85,
+      "end": 1.92,
+      "value": "E"
+    },
+    {
+      "start": 1.92,
+      "end": 2.06,
+      "value": "B"
+    },
+    {
+      "start": 2.06,
+      "end": 2.83,
+      "value": "X"
+    }
+  ],
+  "13_david_door4.mp3": [
+    {
+      "start": 0.0,
+      "end": 0.15,
+      "value": "X"
+    },
+    {
+      "start": 0.15,
+      "end": 0.28,
+      "value": "A"
+    },
+    {
+      "start": 0.28,
+      "end": 0.35,
+      "value": "E"
+    },
+    {
+      "start": 0.35,
+      "end": 0.41,
+      "value": "B"
+    },
+    {
+      "start": 0.41,
+      "end": 0.69,
+      "value": "E"
+    },
+    {
+      "start": 0.69,
+      "end": 1.09,
+      "value": "X"
+    },
+    {
+      "start": 1.09,
+      "end": 1.24,
+      "value": "B"
+    },
+    {
+      "start": 1.24,
+      "end": 1.38,
+      "value": "E"
+    },
+    {
+      "start": 1.38,
+      "end": 1.59,
+      "value": "B"
+    },
+    {
+      "start": 1.59,
+      "end": 1.8,
+      "value": "E"
+    },
+    {
+      "start": 1.8,
+      "end": 1.94,
+      "value": "B"
+    },
+    {
+      "start": 1.94,
+      "end": 2.28,
+      "value": "X"
+    }
+  ],
+  "14_leo_artroom.mp3": [
+    {
+      "start": 0.0,
+      "end": 0.2,
+      "value": "X"
+    },
+    {
+      "start": 0.2,
+      "end": 0.49,
+      "value": "C"
+    },
+    {
+      "start": 0.49,
+      "end": 0.54,
+      "value": "X"
+    },
+    {
+      "start": 0.54,
+      "end": 0.65,
+      "value": "A"
+    },
+    {
+      "start": 0.65,
+      "end": 0.93,
+      "value": "C"
+    },
+    {
+      "start": 0.93,
+      "end": 1.78,
+      "value": "X"
+    },
+    {
+      "start": 1.78,
+      "end": 2.21,
+      "value": "C"
+    },
+    {
+      "start": 2.21,
+      "end": 2.26,
+      "value": "E"
+    },
+    {
+      "start": 2.26,
+      "end": 2.44,
+      "value": "F"
+    },
+    {
+      "start": 2.44,
+      "end": 2.58,
+      "value": "B"
+    },
+    {
+      "start": 2.58,
+      "end": 3.33,
+      "value": "X"
+    }
+  ],
+  "15_mia_paint.mp3": [
+    {
+      "start": 0.0,
+      "end": 0.2,
+      "value": "X"
+    },
+    {
+      "start": 0.2,
+      "end": 0.3,
+      "value": "F"
+    },
+    {
+      "start": 0.3,
+      "end": 0.58,
+      "value": "C"
+    },
+    {
+      "start": 0.58,
+      "end": 0.79,
+      "value": "B"
+    },
+    {
+      "start": 0.79,
+      "end": 0.86,
+      "value": "C"
+    },
+    {
+      "start": 0.86,
+      "end": 1.02,
+      "value": "A"
+    },
+    {
+      "start": 1.02,
+      "end": 1.15,
+      "value": "B"
+    },
+    {
+      "start": 1.15,
+      "end": 1.32,
+      "value": "X"
+    },
+    {
+      "start": 1.32,
+      "end": 1.41,
+      "value": "B"
+    },
+    {
+      "start": 1.41,
+      "end": 1.69,
+      "value": "C"
+    },
+    {
+      "start": 1.69,
+      "end": 1.83,
+      "value": "B"
+    },
+    {
+      "start": 1.83,
+      "end": 1.95,
+      "value": "X"
+    },
+    {
+      "start": 1.95,
+      "end": 2.26,
+      "value": "B"
+    },
+    {
+      "start": 2.26,
+      "end": 2.33,
+      "value": "C"
+    },
+    {
+      "start": 2.33,
+      "end": 2.54,
+      "value": "F"
+    },
+    {
+      "start": 2.54,
+      "end": 2.82,
+      "value": "B"
+    },
+    {
+      "start": 2.82,
+      "end": 3.03,
+      "value": "C"
+    },
+    {
+      "start": 3.03,
+      "end": 3.1,
+      "value": "B"
+    },
+    {
+      "start": 3.1,
+      "end": 3.38,
+      "value": "F"
+    },
+    {
+      "start": 3.38,
+      "end": 3.51,
+      "value": "A"
+    },
+    {
+      "start": 3.51,
+      "end": 4.29,
+      "value": "X"
+    }
+  ],
+  "16_fast_recap.mp3": [
+    {
+      "start": 0.0,
+      "end": 0.09,
+      "value": "X"
+    },
+    {
+      "start": 0.09,
+      "end": 0.25,
+      "value": "H"
+    },
+    {
+      "start": 0.25,
+      "end": 0.32,
+      "value": "C"
+    },
+    {
+      "start": 0.32,
+      "end": 0.6,
+      "value": "F"
+    },
+    {
+      "start": 0.6,
+      "end": 0.7,
+      "value": "A"
+    },
+    {
+      "start": 0.7,
+      "end": 1.54,
+      "value": "X"
+    },
+    {
+      "start": 1.54,
+      "end": 1.59,
+      "value": "H"
+    },
+    {
+      "start": 1.59,
+      "end": 1.64,
+      "value": "C"
+    },
+    {
+      "start": 1.64,
+      "end": 1.75,
+      "value": "A"
+    },
+    {
+      "start": 1.75,
+      "end": 1.81,
+      "value": "B"
+    },
+    {
+      "start": 1.81,
+      "end": 1.87,
+      "value": "C"
+    },
+    {
+      "start": 1.87,
+      "end": 2.08,
+      "value": "B"
+    },
+    {
+      "start": 2.08,
+      "end": 2.79,
+      "value": "X"
+    },
+    {
+      "start": 2.79,
+      "end": 2.91,
+      "value": "A"
+    },
+    {
+      "start": 2.91,
+      "end": 3.01,
+      "value": "H"
+    },
+    {
+      "start": 3.01,
+      "end": 3.08,
+      "value": "C"
+    },
+    {
+      "start": 3.08,
+      "end": 3.22,
+      "value": "B"
+    },
+    {
+      "start": 3.22,
+      "end": 3.29,
+      "value": "E"
+    },
+    {
+      "start": 3.29,
+      "end": 3.43,
+      "value": "B"
+    },
+    {
+      "start": 3.43,
+      "end": 4.24,
+      "value": "X"
+    },
+    {
+      "start": 4.24,
+      "end": 4.32,
+      "value": "C"
+    },
+    {
+      "start": 4.32,
+      "end": 4.46,
+      "value": "B"
+    },
+    {
+      "start": 4.46,
+      "end": 4.74,
+      "value": "C"
+    },
+    {
+      "start": 4.74,
+      "end": 5.49,
+      "value": "X"
+    }
+  ],
+  "17_both_yay.mp3": [
+    {
+      "start": 0.0,
+      "end": 0.19,
+      "value": "X"
+    },
+    {
+      "start": 0.19,
+      "end": 0.46,
+      "value": "B"
+    },
+    {
+      "start": 0.46,
+      "end": 0.53,
+      "value": "C"
+    },
+    {
+      "start": 0.53,
+      "end": 0.74,
+      "value": "B"
+    },
+    {
+      "start": 0.74,
+      "end": 1.7,
+      "value": "X"
+    },
+    {
+      "start": 1.7,
+      "end": 1.81,
+      "value": "C"
+    },
+    {
+      "start": 1.81,
+      "end": 1.88,
+      "value": "B"
+    },
+    {
+      "start": 1.88,
+      "end": 1.95,
+      "value": "G"
+    },
+    {
+      "start": 1.95,
+      "end": 2.09,
+      "value": "C"
+    },
+    {
+      "start": 2.09,
+      "end": 2.16,
+      "value": "E"
+    },
+    {
+      "start": 2.16,
+      "end": 2.3,
+      "value": "B"
+    },
+    {
+      "start": 2.3,
+      "end": 3.07,
+      "value": "X"
+    }
+  ],
+  "18_teachers_bye.mp3": [
+    {
+      "start": 0.0,
+      "end": 0.14,
+      "value": "X"
+    },
+    {
+      "start": 0.14,
+      "end": 0.25,
+      "value": "F"
+    },
+    {
+      "start": 0.25,
+      "end": 0.32,
+      "value": "D"
+    },
+    {
+      "start": 0.32,
+      "end": 0.46,
+      "value": "B"
+    },
+    {
+      "start": 0.46,
+      "end": 0.54,
+      "value": "A"
+    },
+    {
+      "start": 0.54,
+      "end": 0.63,
+      "value": "C"
+    },
+    {
+      "start": 0.63,
+      "end": 0.91,
+      "value": "B"
+    },
+    {
+      "start": 0.91,
+      "end": 1.31,
+      "value": "X"
+    },
+    {
+      "start": 1.31,
+      "end": 1.52,
+      "value": "B"
+    },
+    {
+      "start": 1.52,
+      "end": 1.66,
+      "value": "F"
+    },
+    {
+      "start": 1.66,
+      "end": 1.73,
+      "value": "B"
+    },
+    {
+      "start": 1.73,
+      "end": 1.94,
+      "value": "C"
+    },
+    {
+      "start": 1.94,
+      "end": 2.15,
+      "value": "B"
+    },
+    {
+      "start": 2.15,
+      "end": 2.22,
+      "value": "G"
+    },
+    {
+      "start": 2.22,
+      "end": 2.36,
+      "value": "C"
+    },
+    {
+      "start": 2.36,
+      "end": 2.43,
+      "value": "B"
+    },
+    {
+      "start": 2.43,
+      "end": 2.57,
+      "value": "E"
+    },
+    {
+      "start": 2.57,
+      "end": 2.9,
+      "value": "X"
+    }
+  ]
+}
