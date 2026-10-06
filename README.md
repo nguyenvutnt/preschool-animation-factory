@@ -65,7 +65,11 @@ preschool-animation-factory/
 │   ├── visual_composer.py    # Dựng sân khấu 1080p Zero-Collision
 │   ├── subtitle_generator.py # Phụ đề ASS Glenn Doman
 │   ├── video_renderer.py     # Động cơ render FFmpeg siêu tốc
-│   └── qc_validator.py       # Cổng kiểm định chất lượng tự động
+│   ├── qc_validator.py       # Cổng kiểm định chất lượng tự động
+│   └── clone_engine.py       # Reverse-engineer link YouTube/TikTok -> True English
+├── data/                     # Ngữ liệu gốc 48 tuần True English
+│   ├── master-te.json        # Ma trận 48 tuần x 6 khối tuổi
+│   └── tuong_tac_noi_dung.jsonl # 839 hoạt động & câu hỏi tương tác
 ├── pipeline/                 # Bộ điều phối sản xuất hàng loạt
 │   ├── worker_pool.py        # Quản lý 4-6 worker render song song
 │   └── daemon_runner.py      # Tiến trình chạy tự động 24/7
@@ -83,6 +87,10 @@ preschool-animation-factory/
 # 1. Chạy thử nghiệm 1 clip mẫu đạt chuẩn quốc tế
 python3 core/video_renderer.py --demo
 
-# 2. Khởi chạy dây chuyền sản xuất đa luồng
-python3 pipeline/worker_pool.py --workers 4 --batch-size 50
+# 2. CLONE & REVERSE-ENGINEER 1 CLIP YOUTUBE / TIKTOK SANG TRUE ENGLISH:
+# Hệ thống tự tải -> bóc tách nhịp điệu -> ánh xạ sang tuần/khối tuổi -> render video mới:
+python3 core/clone_engine.py "https://www.youtube.com/watch?v=yCjJyiqpAuU" --week W04 --grade Yellow
+
+# 3. Khởi chạy dây chuyền sản xuất đa luồng (Worker Pool)
+python3 pipeline/worker_pool.py --workers 4 --count 20
 ```
