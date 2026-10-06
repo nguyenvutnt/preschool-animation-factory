@@ -71,26 +71,47 @@ preschool-animation-factory/
 │   ├── master-te.json        # Ma trận 48 tuần x 6 khối tuổi
 │   └── tuong_tac_noi_dung.jsonl # 839 hoạt động & câu hỏi tương tác
 ├── pipeline/                 # Bộ điều phối sản xuất hàng loạt
-│   ├── worker_pool.py        # Quản lý 4-6 worker render song song
+│   ├── worker_pool.py        # Quản lý 4-8 worker render song song
+│   ├── produce_batch.py      # Điều phối sản xuất 100 - 500 clip/ngày (thời lượng 1-5 phút)
 │   └── daemon_runner.py      # Tiến trình chạy tự động 24/7
 ├── res/                      # Kho tài nguyên dùng chung
 │   ├── bgm/                  # 10 bản nhạc nền thiếu nhi bản quyền sạch (Incompetech CC-BY 4.0)
 │   └── sfx/                  # Hiệu ứng âm thanh mộc
 └── config/                   # Cấu hình chuẩn xuất bản
+    ├── clip_genres.json      # Định nghĩa chuẩn 8 thể loại học liệu
+    └── publishing_specs.json # Chuẩn kỹ thuật EBU R128, Rec.709, Low-Stimulation
 ```
 
 ---
 
-## 4. BẮT ĐẦU NHANH (QUICK START)
+## 4. HỆ SINH THÁI 8 THỂ LOẠI HỌC LIỆU MẦM NON
+
+Hệ thống không mặc định clip bài hát mà phân hóa thành 8 thể loại chuyên biệt:
+1. **Glenn Doman (Flashcard Bit)**: 1.0 – 1.5 phút (tráo nhanh 1.0s/từ, 0 BGM, não phải chụp hình tức thì).
+2. **Phonics (Oxford Phonics)**: 1.5 – 2.5 phút (Letter sounds, CVC blending, phonics chant).
+3. **Sight Words**: 1.5 – 2.0 phút (See-Say-Spell-3 Repeated Sentences).
+4. **Từ vựng (Vocabulary)**: 2.0 – 3.0 phút (Vật thể thật, phát âm x2, câu TPR, đố 3s).
+5. **Giao tiếp (Daily Conversation)**: 2.0 – 3.5 phút (Đối thoại 2 nhân vật, có 3 lần interactive pause 3s).
+6. **Thơ vần (Nursery Rhymes)**: 1.5 – 2.5 phút (Thơ 4 câu vần chân, steady beat).
+7. **Bài hát vận động (Song)**: 2.5 – 3.5 phút (Action TPR chant theo nhạc).
+8. **Truyện kể tranh (Read-Along Story)**: 3.5 – 5.0 phút (Truyện tranh 8-10 cảnh, read-along text).
+
+---
+
+## 5. BẮT ĐẦU NHANH (QUICK START)
 
 ```bash
-# 1. Chạy thử nghiệm 1 clip mẫu đạt chuẩn quốc tế
-python3 core/video_renderer.py --demo
+# 1. Chạy thử nghiệm 1 clip đơn lẻ theo thể loại (glenn_doman, phonics, vocabulary, conversation,...)
+python3 core/video_renderer.py --genre glenn_doman
 
-# 2. CLONE & REVERSE-ENGINEER 1 CLIP YOUTUBE / TIKTOK SANG TRUE ENGLISH:
-# Hệ thống tự tải -> bóc tách nhịp điệu -> ánh xạ sang tuần/khối tuổi -> render video mới:
-python3 core/clone_engine.py "https://www.youtube.com/watch?v=yCjJyiqpAuU" --week W04 --grade Yellow
+# 2. SẢN XUẤT HÀNG LOẠT 100 – 500 CLIPS (Thời lượng 1 – 5 phút):
+# Sản xuất theo tuần học (150 clips cho cả 6 khối tuổi):
+python3 pipeline/produce_batch.py --week W04 --workers 6
 
-# 3. Khởi chạy dây chuyền sản xuất đa luồng (Worker Pool)
-python3 pipeline/worker_pool.py --workers 4 --count 20
+# Sản xuất theo chỉ tiêu số lượng (100 clips trong ~25 phút):
+python3 pipeline/produce_batch.py --count 100 --workers 6
+
+# 3. Chạy tiến trình Daemon tự động hóa 24/7 (Đạt 500 clips/ngày):
+nohup python3 pipeline/daemon_runner.py --daily-target 500 --batch-size 25 --workers 6 > /dev/null 2>&1 &
 ```
+

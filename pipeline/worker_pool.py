@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ĐỘNG CƠ ĐIỀU PHỐI ĐA TIẾN TRÌNH (PARALLEL WORKER POOL).
 Phân bổ khối lượng sản xuất 500 - 1.000 clip/ngày qua 4 - 8 workers song song.
-Mỗi worker xử lý độc lập từ Voice -> Staging -> Render -> QC.
+Hỗ trợ đa dạng thể loại: Glenn Doman, Vocabulary, Phonics, Sight Words, Conversation, Rhyme, Story, Song.
 """
 from __future__ import annotations
 
@@ -9,7 +9,10 @@ import argparse
 import concurrent.futures
 import json
 import sys
+import time
 from pathlib import Path
+from typing import Any, Dict, List
+
 ROOT_DIR = Path(__file__).resolve().parent.parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
@@ -20,9 +23,17 @@ def render_worker_task(task_data: Dict[str, Any], out_dir: Path) -> Dict[str, An
     """Tác vụ xử lý độc lập của từng worker."""
     clip_id = task_data["clip_id"]
     shots = task_data["shots"]
+    genre = task_data.get("genre", "vocabulary")
     bgm = task_data.get("bgm_name")
     img_path = Path(task_data["image_path"]) if "image_path" in task_data else None
-    return render_clip_hoan_chinh(clip_id, shots, out_dir, bgm_name=bgm, subject_image_path=img_path)
+    return render_clip_hoan_chinh(
+        clip_id,
+        shots,
+        out_dir,
+        genre=genre,
+        bgm_name=bgm,
+        subject_image_path=img_path
+    )
 
 def chay_worker_pool(
     tasks: List[Dict[str, Any]],
@@ -45,34 +56,34 @@ def chay_worker_pool(
             try:
                 data = future.result()
                 results.append(data)
-                print(f"  ✅ [Xong {data['status']}] {clip_id} trong {data['render_time_seconds']}s (LUFS: {data['integrated_lufs']})")
+                print(f"  ✅ [Xong {data['status']}] {clip_id} ({data.get('genre', 'vocab').upper()}) trong {data['render_time_seconds']}s (LUFS: {data['integrated_lufs']})")
             except Exception as exc:
                 print(f"  ❌ [Lỗi] {clip_id}: {exc}")
 
     total_time = round(time.time() - t0, 2)
-    speed = round(len(tasks) / (total_time / 60), 1)
+    speed = round(len(tasks) / (total_time / 60), 1) if total_time > 0 else 0
     print(f"🏁 Hoàn thành batch {len(tasks)} clips trong {total_time}s (Tốc độ: {speed} clips/phút ~ {speed*60:.0f} clips/giờ).")
     return results
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--workers", type=int, default=4, help="Số lượng worker song song")
-    parser.add_argument("--count", type=int, default=5, help="Số lượng clip chạy thử")
+    parser.add_argument("--count", type=int, default=8, help="Số lượng clip chạy thử")
     args = parser.parse_args()
 
-    # Tạo batch test
-    sample_words = ["Apple", "Ball", "Cat", "Dog", "Elephant", "Fish", "Giraffe", "Hat"]
+    from core.llm_engine import tao_kich_ban_clip_theo_the_loai
+    all_genres = ["glenn_doman", "vocabulary", "phonics", "sight_words", "conversation", "rhyme", "story", "song"]
+    sample_words = ["Apple", "Ball", "Cat", "Dog", "Duck", "Fish", "Sun", "Star"]
+
     test_tasks = []
-    for i in range(min(args.count, len(sample_words))):
+    for i in range(min(args.count, len(all_genres))):
+        g = all_genres[i]
         w = sample_words[i]
+        kb = tao_kich_ban_clip_theo_the_loai(g, w)
         test_tasks.append({
-            "clip_id": f"batch_test_{w.lower()}",
-            "shots": [
-                {"card_text": f"HELLO {w.upper()}", "speech": f"Hello {w}! Welcome friend.", "duration": 4.0},
-                {"card_text": f"A IS FOR {w.upper()}", "speech": f"Look! This is an {w}.", "duration": 4.0},
-                {"card_text": f"CAN YOU SAY {w.upper()}?", "speech": f"Can you say {w}?", "duration": 4.5},
-                {"card_text": f"GREAT! {w.upper()}", "speech": f"Good job! It is {w}.", "duration": 4.0}
-            ]
+            "clip_id": f"batch_{g}_{w.lower()}",
+            "genre": g,
+            "shots": kb["shots"]
         })
 
     out_batch = ROOT_DIR / "out_batch_test"

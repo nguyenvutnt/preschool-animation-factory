@@ -1,6 +1,16 @@
 #!/usr/bin/env python3
-"""MODULE ĐIỀU PHỐI DÂY CHUYỀN SẢN XUẤT VIDEO MẦM NON HOÀN CHỈNH.
-Kết nối: Visual Composer + Voice Engine + Audio Master + Subtitle ASS + FFmpeg Rec.709 CFR 25fps + QC Validator.
+"""MODULE ĐIỀU PHỐI DÂY CHUYỀN SẢN XUẤT VIDEO MẦM NON ĐA THỂ LOẠI.
+Hỗ trợ toàn diện 8 thể loại:
+  1. glenn_doman (Flashcard tráo thẻ nhanh não phải, không BGM hoặc gõ phách tĩnh)
+  2. vocabulary (Từ vựng trực quan Cambridge Pre-A1)
+  3. phonics (Ngữ âm Oxford Phonics)
+  4. sight_words (Từ nhận diện tức thì Dolch/Fry)
+  5. conversation (Giao tiếp tình huống đối thoại 2 nhân vật)
+  6. rhyme (Thơ vần điệu)
+  7. story (Truyện tranh kể chuyện Read-Along)
+  8. song (Bài hát & vận động TPR)
+
+Kết nối: Multi-Genre Visual Composer + Voice Engine + Audio Master + Multi-Genre Subtitle ASS + FFmpeg Rec.709 CFR 25fps + QC Validator.
 """
 from __future__ import annotations
 
@@ -13,12 +23,14 @@ import subprocess
 import time
 import sys
 from pathlib import Path
+from typing import Any, Dict, List, Optional
+
 ROOT_DIR = Path(__file__).resolve().parent.parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 RES_BGM = ROOT_DIR / "res" / "bgm"
 
-from core.visual_composer import render_stage_image
+from core.visual_composer import compose_stage_by_genre
 from core.voice_engine import sinh_giong_doc
 from core.audio_master import master_audio_ebu_r128
 from core.subtitle_generator import tao_file_sub_ass
@@ -28,29 +40,52 @@ def render_clip_hoan_chinh(
     clip_id: str,
     shots: List[Dict[str, Any]],
     out_dir: Path,
+    genre: str = "vocabulary",
     bgm_name: Optional[str] = None,
     subject_image_path: Optional[Path] = None
 ) -> Dict[str, Any]:
-    """Sản xuất 1 clip video mầm non đạt chuẩn xuất bản quốc tế."""
+    """Sản xuất 1 clip video mầm non đa thể loại đạt chuẩn xuất bản quốc tế."""
     work_dir = out_dir / f"_work_{clip_id}"
     work_dir.mkdir(parents=True, exist_ok=True)
     t_start = time.time()
+    g = genre.lower().strip()
 
-    # 1. Chọn BGM ngẫu nhiên nếu không chỉ định
-    if not bgm_name:
-        bgm_list = list(RES_BGM.glob("*.mp3"))
-        bgm_file = random.choice(bgm_list) if bgm_list else None
-    else:
+    # 1. Quản lý BGM theo đặc thù từng thể loại
+    bgm_file = None
+    if g in ("glenn_doman", "glenndoman", "flashcard"):
+        # Glenn Doman tuyệt đối không để nhạc nền làm phân tán chú ý não phải
+        bgm_file = None
+    elif bgm_name:
         bgm_file = RES_BGM / bgm_name
+    else:
+        bgm_list = list(RES_BGM.glob("*.mp3"))
+        if bgm_list:
+            bgm_file = random.choice(bgm_list)
 
     # 2. Sinh Audio cho từng shot & Concat
     speech_parts = []
     total_duration = 0.5 # Lead silence
     for idx, s in enumerate(shots):
         spk_file = work_dir / f"speech_{idx:02d}.mp3"
-        sinh_giong_doc(s["speech"], spk_file)
+        # Chọn giọng đọc và tốc độ theo thể loại hoặc phân vai
+        voice = "oxford_teacher"
+        if g in ("conversation", "giaotiep"):
+            speaker = s.get("speaker", "A")
+            voice = "oxford_teacher" if (speaker == "A" or idx % 2 == 0) else "cartoon_child"
+        elif g in ("story", "truyen"):
+            voice = "oxford_teacher"
+        elif g in ("song", "movement"):
+            voice = "cartoon_child"
+
+        rate = s.get("rate", "-16%")
+        if g in ("glenn_doman", "flashcard"):
+            rate = "-5%" # Đọc dứt khoát 1s/từ
+        elif g in ("story", "truyen"):
+            rate = "-18%" # Giọng kể chuyện thong thả
+
+        sinh_giong_doc(s["speech"], spk_file, voice_type=voice, rate=rate)
         speech_parts.append(spk_file)
-        dur = s.get("duration", 5.0)
+        dur = s.get("duration", 5.0 if g != "glenn_doman" else 1.0)
         total_duration += dur
 
     # Concat speech files
@@ -77,19 +112,19 @@ def render_clip_hoan_chinh(
     if bgm_file and bgm_file.exists():
         master_audio_ebu_r128(full_speech, bgm_file, master_audio)
     else:
-        # Nếu không có BGM, chỉ ép chuẩn loudnorm
+        # Ép chuẩn loudnorm độc lập cho giọng đọc
         subprocess.run([
             'ffmpeg', '-y', '-i', str(full_speech),
             '-af', 'loudnorm=I=-14.0:TP=-1.0:LRA=7.0',
             '-c:a', 'aac', '-b:a', '192k', str(master_audio)
         ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
 
-    # 4. Tạo Sân khấu Visual & Subtitle ASS
+    # 4. Tạo Sân khấu Visual theo thể loại & Subtitle ASS
     stage_img = work_dir / "stage.png"
-    render_stage_image(stage_img, subject_image_path=subject_image_path)
+    compose_stage_by_genre(genre, stage_img, subject_image_path=subject_image_path)
 
     ass_sub = work_dir / "subtitles.ass"
-    tao_file_sub_ass(shots, ass_sub)
+    tao_file_sub_ass(shots, ass_sub, genre=genre)
 
     # 5. Render Video H.264 Rec.709 CFR 25fps Siêu tốc
     out_video = out_dir / f"{clip_id}.mp4"
@@ -111,26 +146,28 @@ def render_clip_hoan_chinh(
 
     # 6. Kiểm định chất lượng tự động (Auto QC Gate)
     qc_data = kiem_dinh_video(out_video)
+    qc_data["genre"] = genre
     qc_data["render_time_seconds"] = round(t_render, 2)
-    qc_data["bgm_used"] = bgm_file.name if bgm_file else "None"
+    qc_data["bgm_used"] = bgm_file.name if bgm_file else "None (Clean Vocal Policy)"
 
     # Dọn dẹp file tạm _work để giữ ổ cứng thông thoáng
     shutil.rmtree(work_dir, ignore_errors=True)
     return qc_data
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description="Render video mầm non đa thể loại")
     parser.add_argument("--demo", action="store_true", help="Chạy demo 1 clip mẫu")
+    parser.add_argument("--genre", default="vocabulary", choices=[
+        "glenn_doman", "vocabulary", "phonics", "sight_words", "conversation", "rhyme", "story", "song"
+    ], help="Thể loại clip học liệu")
     args = parser.parse_args()
 
-    demo_shots = [
-        {"card_text": "HELLO SUN /sʌn/", "speech": "Hello warm sun! Good morning.", "duration": 4.5},
-        {"card_text": "THE SUN IS YELLOW", "speech": "Look! The sun is bright and yellow.", "duration": 4.5},
-        {"card_text": "CAN YOU SAY SUN?", "speech": "Can you say sun? Let's say it!", "duration": 5.0},
-        {"card_text": "GREAT JOB! /sʌn/", "speech": "Sun! Wonderful job, little friends.", "duration": 4.5}
-    ]
     out_dir = ROOT_DIR / "out_demo"
     out_dir.mkdir(parents=True, exist_ok=True)
-    print("Khởi chạy demo render 1 clip đạt chuẩn xuất bản...")
-    res = render_clip_hoan_chinh("demo_sun_clip", demo_shots, out_dir)
+
+    from core.llm_engine import tao_kich_ban_clip_theo_the_loai
+    kb = tao_kich_ban_clip_theo_the_loai(args.genre, "Apple")
+    clip_id = f"demo_{args.genre}_{int(time.time())}"
+    print(f"Khởi chạy render clip thể loại: {args.genre.upper()}...")
+    res = render_clip_hoan_chinh(clip_id, kb["shots"], out_dir, genre=args.genre)
     print(json.dumps(res, indent=2))

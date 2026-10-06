@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 """MODULE REVERSE-ENGINEERING & CLONE VIDEO YOUTUBE / TIKTOK SANG CHUẨN TRUE ENGLISH™.
-Quy trình:
-  1. Ingest: Tải metadata, audio, subtitles từ link YouTube hoặc TikTok qua `yt-dlp`.
-  2. Reverse Engineer: Phân tích cấu trúc kịch bản, nhịp cắt cảnh, hook, ngữ điệu bằng Gemini Ultra (`agy`).
-  3. Adapt to True Learning: Thay thế toàn bộ ngữ liệu gốc bằng Syllabus & Hoạt động 48 tuần True English.
-  4. Produce: Render video mới đạt chuẩn xuất bản quốc tế (EBU R128, Low-Stimulation, Glenn Doman).
+Hỗ trợ tự động phân loại đa thể loại (Multi-Genre):
+  1. Glenn Doman (Flashcard / Tráo thẻ nhanh não phải)
+  2. Vocabulary (Từ vựng trực quan Cambridge Pre-A1)
+  3. Phonics (Ngữ âm & Đánh vần Oxford Phonics)
+  4. Sight Words (Từ nhận diện tức thì Dolch & Fry)
+  5. Conversation (Giao tiếp & Tình huống 2 nhân vật)
+  6. Rhyme (Thơ & Vần điệu)
+  7. Story (Truyện kể tranh tương tác Read-Along)
+  8. Song (Bài hát & Vận động TPR)
 """
 from __future__ import annotations
 
@@ -23,12 +27,33 @@ ROOT_DIR = Path(__file__).resolve().parent.parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
-from core.llm_engine import sinh_kich_ban_gemini
+from core.llm_engine import sinh_kich_ban_gemini, tao_kich_ban_clip_theo_the_loai
 from core.video_renderer import render_clip_hoan_chinh
 
 DATA_DIR = ROOT_DIR / "data" / "true_english_48_weeks"
 MASTER_TE_FILE = DATA_DIR / "master-te.json"
 ACTIVITIES_FILE = DATA_DIR / "tuong_tac_noi_dung.jsonl"
+
+def nhan_dien_the_loai_tu_dong(title: str, desc: str = "", transcript: str = "") -> str:
+    """Tự động phân tích metadata video để nhận diện thể loại học liệu chính xác."""
+    text = f"{title} {desc} {transcript}".lower()
+
+    if any(k in text for k in ["glenn doman", "flashcard", "bit of intelligence", "trao the", "flash card"]):
+        return "glenn_doman"
+    elif any(k in text for k in ["phonic", "letter sound", "cvc", "blending", "alphabet sound", "ngu am"]):
+        return "phonics"
+    elif any(k in text for k in ["sight word", "dolch", "fry", "high frequency", "tu nhan dien"]):
+        return "sight_words"
+    elif any(k in text for k in ["conversation", "dialogue", "greeting", "ask and answer", "giao tiep", "doi thoai"]):
+        return "conversation"
+    elif any(k in text for k in ["rhyme", "poem", "nursery rhyme", "tho ", "dong dao"]):
+        return "rhyme"
+    elif any(k in text for k in ["story", "fairytale", "storybook", "read along", "read aloud", "truyen"]):
+        return "story"
+    elif any(k in text for k in ["song", "dance", "action song", "sing along", "movement", "bai hat", "nhac"]):
+        return "song"
+    else:
+        return "vocabulary"
 
 def lay_ngu_lieu_true_english(tuan: str = "W04", khoi: str = "Yellow") -> Dict[str, Any]:
     """Trích xuất chủ đề và hoạt động chuẩn từ kho 48 tuần True English."""
@@ -72,7 +97,6 @@ def tai_thong_tin_video(url_or_file: str, work_dir: Path) -> Dict[str, Any]:
     """Tải thông tin, phụ đề và âm thanh từ YouTube hoặc TikTok qua yt-dlp."""
     work_dir.mkdir(parents=True, exist_ok=True)
 
-    # Nếu là file cục bộ có sẵn
     if Path(url_or_file).exists():
         local_p = Path(url_or_file)
         return {
@@ -82,10 +106,6 @@ def tai_thong_tin_video(url_or_file: str, work_dir: Path) -> Dict[str, Any]:
             "transcript": "Local sample video transcript",
             "audio_path": str(local_p)
         }
-
-    # Nếu là link YouTube / TikTok
-    info_json_path = work_dir / "info.json"
-    audio_path = work_dir / "audio.mp3"
 
     cmd = [
         "yt-dlp",
@@ -100,13 +120,7 @@ def tai_thong_tin_video(url_or_file: str, work_dir: Path) -> Dict[str, Any]:
     description = meta.get("description", "")
     duration = meta.get("duration", 60.0)
 
-    # Cố gắng lấy phụ đề nếu có
-    transcript = ""
-    subtitles = meta.get("subtitles", {}) or meta.get("automatic_captions", {})
-    if "en" in subtitles:
-        transcript = f"Captions available in English for: {title}"
-    else:
-        transcript = f"{title}. {description[:300]}"
+    transcript = f"{title}. {description[:300]}"
 
     return {
         "title": title,
@@ -118,88 +132,89 @@ def tai_thong_tin_video(url_or_file: str, work_dir: Path) -> Dict[str, Any]:
 
 def phan_tich_va_chuyen_doi_sang_true_english(
     video_meta: Dict[str, Any],
-    te_data: Dict[str, Any]
+    te_data: Dict[str, Any],
+    genre: str = "vocabulary"
 ) -> Dict[str, Any]:
-    """Dùng Gemini Ultra phân tích công thức của video nguồn và clone sang True English."""
+    """Bóc tách cấu trúc kỹ thuật và chuyển đổi sang kịch bản chuẩn thể loại."""
     prompt = f"""Bạn là Giám đốc Nghiên cứu & Sản xuất Hoạt hình Giáo dục Mầm non Quốc tế.
-Dưới đây là thông tin 1 clip video mầm non thành công trên YouTube/TikTok:
+Dưới đây là thông tin clip mầm non gốc:
 - Tiêu đề gốc: "{video_meta.get('title')}"
+- Thể loại xác định: "{genre}"
 - Thời lượng: {video_meta.get('duration')} giây
-- Nội dung tóm tắt: "{video_meta.get('transcript', '')[:400]}"
+- Nội dung: "{video_meta.get('transcript', '')[:300]}"
 
-NHIỆM VỤ CỦA BẠN:
-1. Bóc tách công thức kỹ thuật & cấu trúc tạo sức hút (Reverse Engineering):
-   - Nhịp điệu (Pacing & Rhythm), thời lượng mỗi shot.
-   - Công thức mở đầu (Hook trong 3 giây đầu).
-   - Tương tác phản xạ TPR (hành động, bắt chước).
-   - Nhịp ngừng đố vui (3-Second Interactive Pause).
-
-2. CHUYỂN ĐỔI (CLONE HOÀN TOÀN CẤU TRÚC ĐÓ) sang ngữ liệu của bộ giáo trình TRUE ENGLISH™:
-   - Tuần học: {te_data.get('tuan')}
-   - Khối lớp: {te_data.get('khoi')} (Độ tuổi mầm non)
-   - Chủ đề mục tiêu: "{te_data.get('chu_de')}"
-   - Ngữ liệu tham chiếu: {json.dumps(te_data.get('hoat_dong', []), ensure_ascii=False)}
-
-3. XUẤT RA KỊCH BẢN CHUẨN 4 SHOTS ĐỂ MÁY SẢN XUẤT NGAY:
-   - Mỗi shot tối đa 3-5 từ cốt lõi, phát âm chuẩn Cambridge Pre-A1.
-   - Trả về đúng định dạng JSON thuần túy (không kèm giải thích markdown):
+YÊU CẦU: Chuyển đổi công thức thành công sang giáo trình TRUE ENGLISH™:
+- Tuần: {te_data.get('tuan')} - Khối: {te_data.get('khoi')} - Chủ đề: "{te_data.get('chu_de')}"
+- Trả về đúng JSON thuần túy (không markdown):
 {{
   "original_video": "{video_meta.get('title')}",
+  "genre": "{genre}",
   "reverse_engineering_summary": "Phân tích cấu trúc thành công của video gốc",
   "adapted_topic": "{te_data.get('chu_de')}",
   "shots": [
-    {{"shot_id": 1, "card_text": "...", "speech": "...", "duration": 4.5}},
-    {{"shot_id": 2, "card_text": "...", "speech": "...", "duration": 4.5}},
-    {{"shot_id": 3, "card_text": "...", "speech": "...", "duration": 5.0}},
-    {{"shot_id": 4, "card_text": "...", "speech": "...", "duration": 4.5}}
+    {{"shot_id": 1, "card_text": "...", "speech": "...", "duration": 4.5}}
   ]
 }}
 """
-    raw_res = sinh_kich_ban_gemini(prompt)
-    clean_json = raw_res
-    if "```json" in clean_json:
-        clean_json = clean_json.split("```json")[1].split("```")[0].strip()
-    elif "```" in clean_json:
-        clean_json = clean_json.split("```")[1].split("```")[0].strip()
-
-    return json.loads(clean_json)
+    try:
+        raw_res = sinh_kich_ban_gemini(prompt)
+        clean_json = raw_res
+        if "```json" in clean_json:
+            clean_json = clean_json.split("```json")[1].split("```")[0].strip()
+        elif "```" in clean_json:
+            clean_json = clean_json.split("```")[1].split("```")[0].strip()
+        return json.loads(clean_json)
+    except Exception:
+        # Fallback tức thì sang bộ mẫu chuẩn của thể loại
+        script = tao_kich_ban_clip_theo_the_loai(genre, te_data.get("chu_de", "Hello"), "3-4")
+        script["original_video"] = video_meta.get("title")
+        script["reverse_engineering_summary"] = f"Tự động chuyển đổi theo chuẩn mẫu sư phạm {genre}"
+        return script
 
 def clone_video_sang_true_english(
     url_or_file: str,
     tuan: str = "W04",
     khoi: str = "Yellow",
+    genre: Optional[str] = None,
     out_dir: Optional[Path] = None
 ) -> Dict[str, Any]:
-    """Hàm chạy trọn gói: Nhận Link -> Bóc tách -> Ánh xạ True English -> Render video chuẩn xuất bản."""
+    """Quy trình toàn diện: Nạp video -> Nhận diện thể loại -> Ánh xạ True English -> Render chuẩn EBU."""
     if out_dir is None:
         out_dir = ROOT_DIR / "out_cloned"
     out_dir.mkdir(parents=True, exist_ok=True)
 
     t0 = time.time()
     work_dir = out_dir / "_temp_clone"
-    print(f"📥 [Bước 1] Đang nạp thông tin video từ: {url_or_file}...")
+    print(f"📥 [Bước 1] Nạp thông tin video: {url_or_file}...")
     meta = tai_thong_tin_video(url_or_file, work_dir)
 
-    print(f"📚 [Bước 2] Đang trích xuất ngữ liệu True English 48 tuần: {tuan} - Khối {khoi}...")
+    # Tự động nhận diện thể loại nếu không chỉ định
+    selected_genre = genre if genre else nhan_dien_the_loai_tu_dong(
+        meta.get("title", ""), meta.get("description", ""), meta.get("transcript", "")
+    )
+    print(f"🎯 [Thể loại xác định]: {selected_genre.upper()}")
+
+    print(f"📚 [Bước 2] Trích xuất ngữ liệu True English: {tuan} - Khối {khoi}...")
     te_data = lay_ngu_lieu_true_english(tuan, khoi)
     print(f"   Chủ đề: {te_data['chu_de']}")
 
-    print("🧠 [Bước 3] Gemini Ultra đang bóc tách cấu trúc kỹ thuật và chuyển đổi kịch bản...")
-    adapted_script = phan_tich_va_chuyen_doi_sang_true_english(meta, te_data)
-    print(f"   Bóc tách xong: {adapted_script.get('reverse_engineering_summary', '')[:100]}...")
+    print("🧠 [Bước 3] Điều phối kịch bản chuẩn thể loại...")
+    adapted_script = phan_tich_va_chuyen_doi_sang_true_english(meta, te_data, genre=selected_genre)
 
-    clip_id = f"clone_{tuan.lower()}_{khoi.lower()}_{int(time.time())}"
-    print(f"🎬 [Bước 4] Đang render video đạt chuẩn EBU R128 + Rec.709 CFR 25fps...")
+    clip_id = f"clone_{selected_genre}_{tuan.lower()}_{khoi.lower()}_{int(time.time())}"
+    print(f"🎬 [Bước 4] Render video chuẩn EBU R128 + Rec.709 CFR 25fps...")
     render_result = render_clip_hoan_chinh(
         clip_id,
         adapted_script["shots"],
-        out_dir
+        out_dir,
+        genre=selected_genre
     )
 
     shutil.rmtree(work_dir, ignore_errors=True)
     total_time = round(time.time() - t0, 2)
     render_result["total_process_time"] = total_time
     render_result["original_url"] = url_or_file
+    render_result["genre"] = selected_genre
     render_result["adapted_topic"] = te_data["chu_de"]
     render_result["true_english_week"] = tuan
     render_result["true_english_grade"] = khoi
@@ -208,12 +223,15 @@ def clone_video_sang_true_english(
     return render_result
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Clone kịch bản YouTube/TikTok sang chuẩn True English")
+    parser = argparse.ArgumentParser(description="Clone kịch bản sang chuẩn True English đa thể loại")
     parser.add_argument("url", nargs="?", default="https://www.youtube.com/watch?v=yCjJyiqpAuU", help="Link YouTube hoặc TikTok")
     parser.add_argument("--week", default="W04", help="Tuần học True English (W01 - W48)")
-    parser.add_argument("--grade", default="Yellow", help="Khối tuổi (Red, Orange, Yellow, Green, Blue, Purple)")
+    parser.add_argument("--grade", default="Yellow", help="Khối tuổi")
+    parser.add_argument("--genre", default=None, choices=[
+        "glenn_doman", "vocabulary", "phonics", "sight_words", "conversation", "rhyme", "story", "song"
+    ], help="Chỉ định thể loại nếu muốn ghi đè tự động")
     args = parser.parse_args()
 
-    res = clone_video_sang_true_english(args.url, tuan=args.week, khoi=args.grade)
+    res = clone_video_sang_true_english(args.url, tuan=args.week, khoi=args.grade, genre=args.genre)
     print("\nKẾT QUẢ XUẤT XƯỞNG:")
     print(json.dumps(res, indent=2, ensure_ascii=False))

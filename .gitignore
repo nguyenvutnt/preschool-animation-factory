@@ -5,15 +5,21 @@ __pycache__/
 
 # Temporary work directories
 _work/
+_work*/
 *.tmp
 temp_*
 logs/*.log
 
 # Media render outputs (keep repo light)
 out/
+out_*/
+dist_publish/
+dist/
 *.mp4
 *.mkv
 *.avi
+*.aac
+*.wav
 
 # OS / Editor artifacts
 .DS_Store

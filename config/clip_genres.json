@@ -1,0 +1,177 @@
+{
+  "genres": {
+    "glenn_doman": {
+      "id": "glenn_doman",
+      "ten_the_loai": "Glenn Doman Flashcard Bit (Tráo thẻ nhanh Não phải)",
+      "muc_tieu_su_pham": "Kích thích khả năng chụp hình não phải (Right Brain Photographic Memory), nhận diện từ nguyên khối không phân tích, phản xạ tức thì.",
+      "dac_diem_nhip_do": {
+        "thoi_gian_moi_the_giay": 1.0,
+        "so_the_moi_bo": "5 - 10 thẻ",
+        "khoang_nghi_giua_bo": 1.5,
+        "nhip_tong_clip": "15 - 30 giây"
+      },
+      "dac_diem_visual": {
+        "layout": "glenn_doman_fullscreen",
+        "nen": "#FFFFFF",
+        "font_family": "DejaVu Sans",
+        "font_size": 120,
+        "font_color": "#DC143C",
+        "font_weight": "Bold",
+        "nguyen_tac_vang": "Zero Clutter - Tuyệt đối không để hình ảnh đè lên chữ trong lượt tráo thẻ chữ."
+      },
+      "dac_diem_audio": {
+        "giong_doc": "Dứt khoát, to, rõ ràng, dứt điểm từng từ, ngữ điệu chuẩn Oxford/Cambridge",
+        "bgm_policy": "Khuyên dùng KHÔNG nhạc nền hoặc chỉ dùng nhịp gõ phách tĩnh rất nhẹ (-24 LUFS)",
+        "interactive_pause": 0.0
+      }
+    },
+    "vocabulary": {
+      "id": "vocabulary",
+      "ten_the_loai": "Vocabulary & Real Concept (Từ vựng & Nhận biết trực quan)",
+      "muc_tieu_su_pham": "Mở rộng vốn từ vựng Pre-A1 Starters, liên kết giữa âm thanh thực tế, hình ảnh minh họa và từ vựng.",
+      "dac_diem_nhip_do": {
+        "thoi_gian_moi_shot_giay": 5.0,
+        "so_shot": 4,
+        "wpm": "85 - 95 WPM",
+        "nhip_tong_clip": "40 - 55 giây"
+      },
+      "dac_diem_visual": {
+        "layout": "zero_collision_stage",
+        "top_stage": "Hình ảnh thật / Minh họa 2D vật thể rõ nét",
+        "bottom_flashcard": "Thẻ chữ đỏ Glenn Doman độc lập ở dải dưới",
+        "buffer_an_toan": ">= 140px không va chạm"
+      },
+      "dac_diem_audio": {
+        "giong_doc": "Ấm áp, phát âm chậm, lặp lại từ khóa 2 lần",
+        "bgm_policy": "Nhạc nền vui tươi mộc mạc, sidechain ducking -14dB khi có giọng nói",
+        "interactive_pause": 3.0
+      }
+    },
+    "phonics": {
+      "id": "phonics",
+      "ten_the_loai": "Oxford Phonics & Blending (Ngữ âm & Đánh vần)",
+      "muc_tieu_su_pham": "Xây dựng mối liên kết Grapheme - Phoneme, rèn luyện kỹ năng tách âm (Segmenting) và ghép vần (Blending CVC, Word Families).",
+      "dac_diem_nhip_do": {
+        "thoi_gian_moi_shot_giay": 4.0,
+        "so_shot": 5,
+        "wpm": "80 - 90 WPM (ngắt âm rõ ràng)",
+        "nhip_tong_clip": "45 - 60 giây"
+      },
+      "dac_diem_visual": {
+        "layout": "phonics_blending_stage",
+        "letter_highlight": "Nguyên âm màu Đỏ (#E63946), Phụ âm màu Xanh Dương (#1D3557)",
+        "segment_boxes": "Các ô âm thanh tách rời rồi trượt gộp vào nhau khi Blend"
+      },
+      "dac_diem_audio": {
+        "giong_doc": "Phát âm âm vị đơn thuần (/æ/, /b/, /k/), không pha âm 'ờ' phía sau",
+        "bgm_policy": "Nhạc gõ phách âm nhạc (Phonics Chant Beat), ducking nhịp nhàng",
+        "interactive_pause": 2.5
+      }
+    },
+    "sight_words": {
+      "id": "sight_words",
+      "ten_the_loai": "Sight Words / High-Frequency (Từ nhận diện tức thì Dolch/Fry)",
+      "muc_tieu_su_pham": "Ghi nhớ tự động các từ có tần suất xuất hiện cao không thể đánh vần thông thường (the, see, like, was, they...).",
+      "dac_diem_nhip_do": {
+        "thoi_gian_moi_shot_giay": 4.5,
+        "so_shot": 5,
+        "quy_trinh": "See -> Say -> Spell -> Read in 3 Repeated Sentences -> Instant Recall",
+        "nhip_tong_clip": "45 - 55 giây"
+      },
+      "dac_diem_visual": {
+        "layout": "sight_words_focus",
+        "word_box": "Từ khóa xuất hiện to ở trung tâm",
+        "sentence_frames": "3 câu ví dụ cùng 1 cấu trúc ngữ pháp chỉ thay thế danh từ cuối câu"
+      },
+      "dac_diem_audio": {
+        "giong_doc": "Đánh vần từng chữ cái rõ ràng (S - E - E -> SEE), đọc câu ngữ điệu tự nhiên",
+        "bgm_policy": "Nhạc nền nhẹ nhàng vui vẻ",
+        "interactive_pause": 3.0
+      }
+    },
+    "conversation": {
+      "id": "conversation",
+      "ten_the_loai": "Daily Conversation & Social Situations (Giao tiếp & Tình huống)",
+      "muc_tieu_su_pham": "Xây dựng phản xạ đối thoại tiếng Anh đời sống, ngôn ngữ lớp học, chào hỏi, chia sẻ, thể hiện cảm xúc.",
+      "dac_diem_nhip_do": {
+        "thoi_gian_moi_shot_giay": 5.0,
+        "so_shot": 4,
+        "cau_truc": "Nhân vật A hỏi -> Khoảng lặng tương tác 3s -> Nhân vật B đáp mẫu -> Cùng nhắc lại",
+        "nhip_tong_clip": "40 - 50 giây"
+      },
+      "dac_diem_visual": {
+        "layout": "split_dialogue_stage",
+        "speakers": "2 nhân vật thân thiện đứng 2 bên (Left/Right)",
+        "speech_bubble": "Bóng thoại xuất hiện theo lượt người nói kèm icon gợi ý câu trả lời"
+      },
+      "dac_diem_audio": {
+        "giong_doc": "2 giọng đọc khác nhau (hoặc Cô giáo và Bé), ngữ điệu tự nhiên, biểu cảm",
+        "bgm_policy": "Nhạc nền êm dịu, tạm lắng khi trẻ chuẩn bị phản xạ",
+        "interactive_pause": 3.5
+      }
+    },
+    "rhyme": {
+      "id": "rhyme",
+      "ten_the_loai": "Nursery Rhymes & Poems (Thơ & Vần điệu)",
+      "muc_tieu_su_pham": "Phát triển nhận thức ngữ âm (Phonological Awareness), nhạc cảm và ngữ điệu ngôn ngữ tự nhiên qua các cặp từ bắt vần.",
+      "dac_diem_nhip_do": {
+        "thoi_gian_moi_shot_giay": 4.5,
+        "so_shot": 4,
+        "nhip_tho": "Thơ 4 câu có vần chân (Rhyme pairs: cat - hat, sun - fun)",
+        "nhip_tong_clip": "35 - 45 giây"
+      },
+      "dac_diem_visual": {
+        "layout": "poem_rhyme_stage",
+        "rhyme_highlight": "Cặp từ bắt vần được tô màu đồng nhất nổi bật",
+        "minh_hoa": "Khung cảnh hội họa pastel êm đềm, không chuyển cảnh giật cục"
+      },
+      "dac_diem_audio": {
+        "giong_doc": "Giàu nhạc tính, nhấn rõ vào các từ bắt vần ở cuối mỗi dòng thơ",
+        "bgm_policy": "Nhạc cụ mộc acoustic (Acoustic Guitar, Glockenspiel, Flute) êm ái",
+        "interactive_pause": 2.0
+      }
+    },
+    "story": {
+      "id": "story",
+      "ten_the_loai": "Read-Along Storybook (Truyện kể tranh tương tác)",
+      "muc_tieu_su_pham": "Phát triển khả năng nghe hiểu cốt truyện (Listening Comprehension), rèn sự tập trung và bài học cảm xúc xã hội (SEL).",
+      "dac_diem_nhip_do": {
+        "thoi_gian_moi_shot_giay": 6.0,
+        "so_shot": 5,
+        "wpm": "80 - 85 WPM",
+        "nhip_tong_clip": "50 - 70 giây"
+      },
+      "dac_diem_visual": {
+        "layout": "storybook_page_turn",
+        "tranh_truyen": "Khung tranh lớn 1500x700 phong cách tranh vẽ minh họa cổ tích",
+        "karaoke_text": "Dòng chữ kể chuyện bên dưới chạy sáng từng cụm từ theo giọng đọc"
+      },
+      "dac_diem_audio": {
+        "giong_doc": "Giọng kể chuyện (Storyteller) truyền cảm, trầm ấm, tốc độ thong thả",
+        "bgm_policy": "Nhạc nền kể chuyện thư giãn (Lullaby / Gentle Story BGM)",
+        "interactive_pause": 2.5
+      }
+    },
+    "song": {
+      "id": "song",
+      "ten_the_loai": "Action Song & Movement (Bài hát & Vận động TPR)",
+      "muc_tieu_su_pham": "Kết hợp ngôn ngữ với vận động thô/vận động tinh (Gross & Fine Motor Skills) thông qua giai điệu âm nhạc vui nhộn.",
+      "dac_diem_nhip_do": {
+        "thoi_gian_moi_shot_giay": 5.0,
+        "so_shot": 4,
+        "cau_truc": "Giai điệu vui tươi -> Hướng dẫn vận động -> Lặp lại điệp khúc -> Hoan hô",
+        "nhip_tong_clip": "45 - 60 giây"
+      },
+      "dac_diem_visual": {
+        "layout": "action_song_stage",
+        "movement_guide": "Hình ảnh hoặc nhân vật mô phỏng động tác vận động rõ ràng (Clap, Jump, Stomp)",
+        "lyric_bar": "Lời bài hát nhấp nháy theo nhịp điệu"
+      },
+      "dac_diem_audio": {
+        "giong_doc": "Giọng hát hoặc giọng chant nhịp điệu hào hứng, kích thích vận động",
+        "bgm_policy": "Nhạc bài hát thiếu nhi sôi nổi, nhịp điệu rõ ràng",
+        "interactive_pause": 2.0
+      }
+    }
+  }
+}
